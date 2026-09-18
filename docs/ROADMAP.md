@@ -3,17 +3,17 @@
 > Unité d'estimation : **une soirée = 2 à 3 h**, développeur seul. Tout est local : Node, pnpm et PostgreSQL 18 dans Docker (ADR-008).
 > Chaque jalon se termine par quelque chose d'**utilisé le lendemain**. Si ce n'est pas le cas, le jalon est mal découpé.
 
-## État au 2026-09-17
+## État au 2026-09-18
 
 **J1 à J7 sont implémentés** (code, 95 tests unitaires, 7 tests d'intégration, build de production OK). Validation effectuée :
 - ingestion réelle des 34 boards du registre + Jobicy (≈ 1 300 annonces en 30 s), incrémental (second passage sans modification), dédup inter-sources ;
-- base de test PGlite (Postgres WebAssembly), Docker n'étant pas encore installé sur le poste (voir ADR-008) ;
+- d'abord sur PGlite (Postgres WebAssembly), puis **sur le vrai PostgreSQL 18.6 dans Docker** : migrations, import du registre, ingestion complète (1 325 annonces, 28 retenues), 102 tests dont les 7 d'intégration (base `jobhunt_test`), sauvegarde `pg_dump` via le conteneur et relecture par `pg_restore` ;
 - interface pilotée dans Edge : tri au clavier, candidature, notes, pipeline, ajout de board, lancement d'une source, fiche entreprise, contact, recherche SIRENE, sans erreur navigateur ;
 - logique de scoring, capture et brouillons testée avec un faux client LLM.
 
 **Reste à faire par Robin** (ne peut pas être fait sans lui) :
-1. Installer Docker Desktop (WSL2), puis `docker compose up -d` et `pnpm db:migrate` (ADR-008 : les binaires Postgres pour Windows sont bloqués par Smart App Control).
-2. Créer `.env` (copie de `.env.example`) : `DATABASE_URL`, `ANTHROPIC_API_KEY`, `CAPTURE_TOKEN`.
+1. ~~Base PostgreSQL~~ — fait : Docker Desktop tourne, base migrée et remplie.
+2. Compléter `.env` (créé, avec un `CAPTURE_TOKEN` généré) : **`ANTHROPIC_API_KEY`**.
 3. Premier vrai passage LLM : **évaluer le scoring sur 20 offres** (J2) et ajuster le barème (→ `scoring.v2`).
 4. France Travail : créer l'application sur francetravail.io, renseigner les identifiants, activer les trois sources `france_travail:*` et lever les `[À VÉRIFIER]` de SOURCES.md.
 5. Charger l'extension dans Chrome (`apps/extension/README.md`).

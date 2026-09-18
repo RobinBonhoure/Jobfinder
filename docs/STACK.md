@@ -10,7 +10,7 @@
 | Node.js | **24.x LTS** (dernière : 24.21.0 « Krypton ») | 2026-09-17 | `nodejs.org/dist/index.json` | Node 26.9.0 est la « Current », non LTS. Poste de Robin : **24.15.0** installé, compatible. Épingler `"engines": { "node": ">=24.12 <25" }` (plancher imposé par Vitest 5 : `^22.12 \|\| ^24 \|\| >=26`). |
 | pnpm | **12.4.2** | 2026-09-17 | `npm view pnpm` | Le pnpm du poste (11.6.0) est géré par corepack : `packageManager: pnpm@12.4.2` suffit, corepack fournit la 12.4.2 dans le projet. |
 | PostgreSQL | **image `postgres:18`** (18.6) | 2026-09-17 | Docker Hub | Exécutée par Docker Compose (ADR-008) : les binaires Windows sont bloqués par Smart App Control. PostgreSQL 19 existe en bêta. |
-| Docker | **Docker Desktop** (WSL2) | 2026-09-18 | — | À installer (WSL n'était pas présent le 2026-09-17). N'exécute que la base. |
+| Docker | **Docker Desktop 4.91.0** (moteur 29.8.0, Compose v5.5.1, WSL 2.7.14) | 2026-09-18 | `docker version`, `winget list` | Installé pour l'utilisateur (`%LOCALAPPDATA%\Programs\DockerDesktop`). N'exécute que la base. |
 
 ## Dépendances structurantes
 

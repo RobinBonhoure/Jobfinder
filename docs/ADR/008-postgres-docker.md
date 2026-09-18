@@ -41,7 +41,13 @@ Docker Desktop est signé et exécute Postgres dans sa VM Linux : Smart App Cont
 
 ## Banc de test pendant le développement
 
-Docker n'étant pas installé lors de l'écriture du code, l'application a été validée contre **PGlite** (Postgres compilé en WebAssembly, non concerné par Smart App Control), exposé par `@electric-sql/pglite-socket` avec `pg_trgm`, `citext` et `pgcrypto`, installé hors du dépôt. PGlite multiplexe toutes les connexions sur un seul backend : il faut alors `DATABASE_POOL_MAX=1`. Ce banc reste utilisable pour tester sans Docker ; la vérification de référence est `DATABASE_URL_TEST` sur une vraie base Postgres.
+Docker Desktop n'ayant pas été repéré au départ (installé pour l'utilisateur, hors du `PATH` du terminal en cours et non démarré), l'application a d'abord été validée contre **PGlite** (Postgres compilé en WebAssembly, non concerné par Smart App Control), exposé par `@electric-sql/pglite-socket` avec `pg_trgm`, `citext` et `pgcrypto`, installé hors du dépôt. PGlite multiplexe toutes les connexions sur un seul backend : il faut alors `DATABASE_POOL_MAX=1`. Ce banc reste utilisable pour tester sans Docker ; la vérification de référence est `DATABASE_URL_TEST` sur une vraie base Postgres.
+
+## Validation du 2026-09-18
+
+Sur l'image `postgres:18` (PostgreSQL 18.6, Debian) : migrations et extensions OK, ingestion complète des 35 sources, 102 tests dont les 7 d'intégration sur une base `jobhunt_test` séparée, `pnpm db:backup` via le `pg_dump` du conteneur (dump relu par `pg_restore`, 11 tables).
+
+Docker Desktop 4.91.0 est installé **pour l'utilisateur** : le CLI est dans `%LOCALAPPDATA%\Programs\DockerDesktop\resources\bin` (déjà dans le `PATH` utilisateur ; un terminal ouvert avant l'installation doit être relancé). Docker Desktop doit être démarré pour que `docker compose` fonctionne.
 
 ## Signal de révision
 
