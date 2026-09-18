@@ -1,18 +1,18 @@
 # JobHunt — Roadmap
 
-> Unité d'estimation : **une soirée = 2 à 3 h**, développeur seul. Tout est local : Node, pnpm et PostgreSQL 18 natif (ADR-008).
+> Unité d'estimation : **une soirée = 2 à 3 h**, développeur seul. Tout est local : Node, pnpm et PostgreSQL 18 dans Docker (ADR-008).
 > Chaque jalon se termine par quelque chose d'**utilisé le lendemain**. Si ce n'est pas le cas, le jalon est mal découpé.
 
 ## État au 2026-09-17
 
 **J1 à J7 sont implémentés** (code, 95 tests unitaires, 7 tests d'intégration, build de production OK). Validation effectuée :
 - ingestion réelle des 34 boards du registre + Jobicy (≈ 1 300 annonces en 30 s), incrémental (second passage sans modification), dédup inter-sources ;
-- base de test PGlite (Postgres WebAssembly), faute de Postgres natif utilisable sur le poste (voir ADR-008) ;
+- base de test PGlite (Postgres WebAssembly), Docker n'étant pas encore installé sur le poste (voir ADR-008) ;
 - interface pilotée dans Edge : tri au clavier, candidature, notes, pipeline, ajout de board, lancement d'une source, fiche entreprise, contact, recherche SIRENE, sans erreur navigateur ;
 - logique de scoring, capture et brouillons testée avec un faux client LLM.
 
 **Reste à faire par Robin** (ne peut pas être fait sans lui) :
-1. Installer PostgreSQL malgré Smart App Control (ADR-008), puis créer la base et `pnpm db:migrate`.
+1. Installer Docker Desktop (WSL2), puis `docker compose up -d` et `pnpm db:migrate` (ADR-008 : les binaires Postgres pour Windows sont bloqués par Smart App Control).
 2. Créer `.env` (copie de `.env.example`) : `DATABASE_URL`, `ANTHROPIC_API_KEY`, `CAPTURE_TOKEN`.
 3. Premier vrai passage LLM : **évaluer le scoring sur 20 offres** (J2) et ajuster le barème (→ `scoring.v2`).
 4. France Travail : créer l'application sur francetravail.io, renseigner les identifiants, activer les trois sources `france_travail:*` et lever les `[À VÉRIFIER]` de SOURCES.md.
@@ -43,7 +43,7 @@ Total : environ **18 soirées**. Ordre recommandé : J1 → J2 → J3 → J4 →
 **Pourquoi Greenhouse** : l'endpoint est public et sans authentification, le JSON est propre (`content=true` donne la description) et le mapping trivial. Beaucoup de scale-ups tech l'utilisent. Remotive a été écarté pour J1 : son flux est mondial et majoritairement hors France, donc son rendement est faible avec le critère « France uniquement ».
 
 **Soirée 1 — Socle**
-- [ ] `winget install PostgreSQL.PostgreSQL.18`, `bin` dans le `PATH`, rôle et base `jobhunt`, `DATABASE_URL` dans `.env`.
+- [ ] Docker Desktop (WSL2), puis `docker compose up -d` (PostgreSQL 18) et `DATABASE_URL` dans `.env`.
 - [ ] `pnpm-workspace.yaml`, `biome.json`, `tsconfig.base.json` (strict), `.env.example`.
 - [ ] `packages/core` : `env.ts` (zod), client `postgres`, schéma Drizzle **minimal** (`companies`, `sources`, `jobs`, `job_clusters`), première migration avec `pg_trgm`.
 - [ ] `profile/boards.json` : 5 à 10 tokens Greenhouse d'entreprises FR remote-friendly, choisis par Robin et testés avec `curl`.
@@ -51,7 +51,7 @@ Total : environ **18 soirées**. Ordre recommandé : J1 → J2 → J3 → J4 →
 **Soirée 2 — Ingestion + filtre**
 - [ ] Adaptateur `greenhouse` (`fetch` + `normalize`) et fixture JSON réelle.
 - [ ] `normalize/*` : `htmlToText`, `detectRemote`, `detectContract`, `detectSeniority`, `normalizeTitle`, `normalizeCompanyName`.
-- [ ] `filter` + `profile/criteria.ts` + `rule_score`.
+- [ ] `filter` + `profile/criteria.json` + `rule_score`.
 - [ ] `ingest.runSource` (upsert, cluster 1:1, clôture) et script `pnpm ingest`, qui exécute toutes les sources activées, **sans cron**.
 - [ ] Tests Vitest : `normalize` sur la fixture, règles de filtre sur 10 titres types.
 
@@ -118,7 +118,7 @@ Total : environ **18 soirées**. Ordre recommandé : J1 → J2 → J3 → J4 →
 - [ ] Compte francetravail.io + application ; OAuth2 client credentials avec token mis en cache jusqu'à expiration.
 - [ ] Adaptateur `france_travail` : curseur de dates, pagination `range`, découpage si l'index 3000 est atteint, plusieurs configurations (`motsCles` react / next.js / typescript + `typeContrat=CDI`).
 - [ ] Adaptateur `jobicy` (`geo` adapté, `industry=engineering`, `tag`).
-- [ ] Liste d'exclusion d'entreprises (ESN, régie) dans `criteria.ts`, alimentée par ce qui remonte.
+- [ ] Liste d'exclusion d'entreprises (ESN, régie) dans `criteria.json`, alimentée par ce qui remonte.
 - [ ] **Mesure** après une semaine : offres passées par source (`/sources`). Décider du sort de Remotive, RemoteOK, WWR et Adzuna (voir « Reporté »).
 
 **Dépendances** : J4 (worker, HttpClient, dédup inter-sources indispensable ici).

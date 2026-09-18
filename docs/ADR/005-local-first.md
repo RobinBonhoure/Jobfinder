@@ -8,7 +8,7 @@ L'outil sert à une seule personne, sur sa machine de travail. Robin éteint son
 
 ## Options
 
-1. **Tout en local** : app Next, worker et PostgreSQL 18 natif (ADR-008).
+1. **Tout en local** : app Next, worker et PostgreSQL 18 dans un conteneur sur la même machine (ADR-008).
 2. **App et worker en local, base hébergée (Neon)** : écarté, voir ADR-008.
 3. **Worker seul hébergé** (Railway, ou `pnpm ingest` planifié dans GitHub Actions) : ingestion même PC éteint, sans authentification puisque rien n'est exposé. Mais il faut une base accessible depuis Internet, un service de plus et un coût éventuel, pour un gain limité aux offres de la nuit.
 4. **Tout déployé** : disponible 24/7 et depuis le mobile, mais il faut une authentification, des secrets et un déploiement à maintenir.

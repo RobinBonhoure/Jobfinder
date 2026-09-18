@@ -9,8 +9,8 @@
 |---|---|---|---|---|
 | Node.js | **24.x LTS** (dernière : 24.21.0 « Krypton ») | 2026-09-17 | `nodejs.org/dist/index.json` | Node 26.9.0 est la « Current », non LTS. Poste de Robin : **24.15.0** installé, compatible. Épingler `"engines": { "node": ">=24.12 <25" }` (plancher imposé par Vitest 5 : `^22.12 \|\| ^24 \|\| >=26`). |
 | pnpm | **12.4.2** | 2026-09-17 | `npm view pnpm` | Le pnpm du poste (11.6.0) est géré par corepack : `packageManager: pnpm@12.4.2` suffit, corepack fournit la 12.4.2 dans le projet. |
-| PostgreSQL | **18.6**, natif Windows (`winget install PostgreSQL.PostgreSQL.18`, paquet 18.6-3) | 2026-09-17 | `winget search` + Docker Hub (même mineure 18.6) | **Bloqué par Smart App Control sur le poste** (DLL non signée), voir ADR-008. PostgreSQL 19 existe en bêta. |
-| Docker | **Non utilisé** | 2026-09-17 | — | Absent du poste (WSL non installé). |
+| PostgreSQL | **image `postgres:18`** (18.6) | 2026-09-17 | Docker Hub | Exécutée par Docker Compose (ADR-008) : les binaires Windows sont bloqués par Smart App Control. PostgreSQL 19 existe en bêta. |
+| Docker | **Docker Desktop** (WSL2) | 2026-09-18 | — | À installer (WSL n'était pas présent le 2026-09-17). N'exécute que la base. |
 
 ## Dépendances structurantes
 
@@ -124,11 +124,12 @@ Modèles Claude (skill `claude-api`, table datée du 2026-06-24, et doc structur
 - Les scripts nommés `clean`, `setup`, `deploy` ou `rebuild` masquent les commandes intégrées → éviter ces noms.
 - pnpm 12 **signale les réglages inconnus** de `pnpm-workspace.yaml` et échoue si la version est épinglée.
 
-### PostgreSQL 18 (natif Windows)
+### PostgreSQL 18 (image Docker)
 
-- Installeur EDB via winget. Le service démarre avec Windows. `bin` à ajouter au `PATH` (`psql`, `pg_dump`, `pg_restore`).
+- **`PGDATA` = `/var/lib/postgresql/18/docker` et `VOLUME` = `/var/lib/postgresql`** : monter le volume sur `/var/lib/postgresql`, sinon les données ne persistent pas là où on le croit.
+- `POSTGRES_USER` est superutilisateur dans l'image : la migration peut créer les extensions.
 - `pg_trgm`, `pgcrypto` et `citext` sont des modules `contrib` créés par `CREATE EXTENSION` dans la migration initiale `[À VÉRIFIER sur l’installation réelle : présents et créables par le rôle jobhunt]` (validé sur PGlite).
-- `pg_dump` doit être de version ≥ celle du serveur (ici les deux sont en 18).
+- `pg_dump` doit être de version ≥ celle du serveur. Sans client sur le poste, `pnpm db:backup` utilise celui du conteneur.
 - Pour mémoire (option écartée, ADR-008) : Neon gratuit = 100 CU-h par mois, 0,5 Go, mise en veille après 5 min, pooler en mode transaction.
 
 ### API Anthropic

@@ -9,20 +9,16 @@ Tout tourne en local. Documentation : [docs/PLAN.md](docs/PLAN.md), [docs/ROADMA
 
 ## Démarrage
 
-Prérequis : Node 24 LTS, corepack (fournit pnpm 12), PostgreSQL 18 sur `localhost`.
+Prérequis : Node 24 LTS, corepack (fournit pnpm 12), Docker Desktop (WSL2).
 
-> Sur ce poste, Smart App Control bloque l'installeur PostgreSQL EDB : voir [ADR-008](docs/ADR/008-postgres-local.md).
+> La base tourne dans Docker parce que Smart App Control bloque les binaires PostgreSQL pour Windows sur ce poste : voir [ADR-008](docs/ADR/008-postgres-docker.md).
 
 ```bash
-# 1. Base : créer le rôle et la base (psql en superutilisateur)
-#    CREATE ROLE jobhunt LOGIN PASSWORD '…';
-#    CREATE DATABASE jobhunt OWNER jobhunt;
-#    \c jobhunt
-#    CREATE EXTENSION IF NOT EXISTS pg_trgm; CREATE EXTENSION IF NOT EXISTS citext; CREATE EXTENSION IF NOT EXISTS pgcrypto;
-#    (la migration les crée aussi si le rôle en a le droit)
+# 1. Base (rôle, mot de passe et base « jobhunt » créés par l'image)
+docker compose up -d
 
 # 2. Configuration
-cp .env.example .env            # puis renseigner DATABASE_URL, ANTHROPIC_API_KEY, CAPTURE_TOKEN
+cp .env.example .env            # DATABASE_URL est déjà bonne ; renseigner ANTHROPIC_API_KEY et CAPTURE_TOKEN
 
 # 3. Installation et schéma
 pnpm install
@@ -36,7 +32,7 @@ pnpm ingest --all
 pnpm dev                        # http://127.0.0.1:3000
 ```
 
-Au quotidien : `pnpm start:all` (build + web + worker). Le worker passe à 7 h, 12 h, 17 h, 22 h et au démarrage.
+Au quotidien : `docker compose up -d` puis `pnpm start:all` (build + web + worker). Le worker passe à 7 h, 12 h, 17 h, 22 h et au démarrage.
 
 ## Commandes utiles
 
@@ -46,7 +42,7 @@ Au quotidien : `pnpm start:all` (build + web + worker). Le worker passe à 7 h, 
 | `pnpm score [--cluster <id> --force]` | Score les offres en attente |
 | `pnpm --filter @jobhunt/worker dry-run [--verbose]` | Teste les boards et le filtre **sans base** |
 | `pnpm --filter @jobhunt/worker refilter` | Réapplique `profile/criteria.json` |
-| `pnpm db:backup` | `pg_dump` dans `./backups/` (8 derniers conservés) |
+| `pnpm db:backup` | `pg_dump` dans `./backups/` (8 derniers conservés ; passe par le conteneur si `pg_dump` n'est pas sur le poste) |
 | `pnpm db:purge-contacts --yes` | Supprime tous les contacts (fin de recherche, RGPD) |
 | `pnpm typecheck && pnpm lint && pnpm test` | Vérifications |
 | `DATABASE_URL_TEST=… pnpm test` | + tests d'intégration sur une base **dédiée** (vidée) |

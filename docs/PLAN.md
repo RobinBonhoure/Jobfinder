@@ -19,7 +19,7 @@ Critère de succès : **en 10 minutes par jour, Robin voit les nouvelles offres 
 | Zone | France uniquement : CDI de droit français, ou employeur ayant une entité en France. Les offres « US only », « contractor », « EOR » et celles qui imposent un fuseau hors CET sont rejetées ou signalées. |
 | Capture manuelle | Extension Chrome MV3 minimale, chargée en mode non empaqueté. Un bookmarklet s'exécuterait sous la CSP de la page ; celle de LinkedIn bloquerait le `fetch` vers l'API locale. |
 | Hébergement | **Tout en local** : app, worker et base. L'outil tourne quand le PC est allumé ; il est éteint le soir et la nuit, et le worker rattrape au démarrage. Pas d'authentification ; l'app écoute sur `127.0.0.1`. |
-| Base | **PostgreSQL 18 natif sous Windows** (winget), sans Docker ([ADR-008](ADR/008-postgres-local.md)). |
+| Base | **PostgreSQL 18 dans Docker Compose**, sur `127.0.0.1` ([ADR-008](ADR/008-postgres-docker.md)) : les binaires Postgres pour Windows sont bloqués par Smart App Control sur ce poste. |
 | Module B | Le brouillon est généré, puis envoyé **manuellement** depuis le client mail de Robin. Ni SMTP ni OAuth mail. |
 
 ### Hors périmètre, explicitement
@@ -69,7 +69,7 @@ flowchart LR
     SA[Server actions]
   end
 
-  DB[(PostgreSQL 18<br/>local)]
+  DB[(PostgreSQL 18<br/>Docker, 127.0.0.1)]
   LLM[[API Anthropic]]
 
   GH & FT & RB --> RUN
@@ -139,7 +139,7 @@ Les exports passent par des sous-chemins dans `package.json#exports` : `@jobhunt
 
 ## 4. Modèle de données
 
-PostgreSQL 18 local, extensions `pg_trgm`, `pgcrypto` et `citext` (modules `contrib`). Le schéma est défini avec Drizzle (`packages/core/src/db/schema.ts`). Les colonnes sont en `snake_case`, les ids sont des `uuid` (sauf `sources.id`), et les horodatages des `timestamptz`.
+PostgreSQL 18 (conteneur local), extensions `pg_trgm`, `pgcrypto` et `citext` (modules `contrib`, créées par la migration `0000`). Le schéma est défini avec Drizzle (`packages/core/src/db/schema.ts`). Les colonnes sont en `snake_case`, les ids sont des `uuid` (sauf `sources.id`), et les horodatages des `timestamptz`.
 
 ### 4.1 Vue d'ensemble
 
@@ -891,19 +891,18 @@ Pas de génération d'adresses par motif, pas de vérification SMTP (`RCPT TO`, 
 
 ## 12. Configuration et exploitation
 
-### Base PostgreSQL locale
+### Base PostgreSQL (Docker Compose)
 
-- Installation : `winget install PostgreSQL.PostgreSQL.18` (18.6 le 2026-09-17, installeur EDB).
-  - Service Windows en démarrage automatique.
-  - Ajouter `C:\Program Files\PostgreSQL\18\bin` au `PATH` pour `psql` et `pg_dump`.
-- Une fois installé :
-  - créer le rôle `jobhunt` (sans superutilisateur) et la base `jobhunt` dont il est propriétaire ;
-  - vérifier que `listen_addresses` reste sur `localhost` `[À VÉRIFIER après installation]`.
-- `DATABASE_URL=postgres://jobhunt:<mdp>@localhost:5432/jobhunt`
-- Driver `postgres` (postgres.js), `max: 5`. Côté Next, le client est un singleton global pour éviter qu'un rechargement à chaud en dev multiplie les pools.
-- Les extensions `pg_trgm`, `pgcrypto` et `citext` sont créées par la première migration. Cela demande le droit `CREATE` sur la base ; ce sont des extensions « trusted » depuis PG13 `[À VÉRIFIER au J1, sinon les créer une fois avec le rôle postgres]`.
+- `docker compose up -d` démarre l'image `postgres:18` définie dans `docker-compose.yml` (ADR-008) :
+  - port publié sur **`127.0.0.1:5432` seulement** ;
+  - volume nommé `jobhunt-pgdata` monté sur **`/var/lib/postgresql`** (obligatoire depuis l'image 18) ;
+  - rôle, mot de passe et base `jobhunt` créés à la première initialisation ; `restart: unless-stopped` ;
+  - `healthcheck` sur `pg_isready`.
+- `DATABASE_URL=postgres://jobhunt:jobhunt@localhost:5432/jobhunt` (mot de passe trivial : la base n'écoute que la boucle locale).
+- Driver `postgres` (postgres.js), pool `DATABASE_POOL_MAX` (5 par défaut). Côté Next, le client est un singleton global pour éviter qu'un rechargement à chaud en dev multiplie les pools.
+- Les extensions `pg_trgm`, `pgcrypto` et `citext` sont créées par la migration `0000`. `POSTGRES_USER` étant superutilisateur dans l'image, aucun droit supplémentaire n'est nécessaire.
 - **Rétention** : `source_runs` de plus de 60 jours supprimés à la fin de chaque fenêtre. Rien d'autre : le volume attendu (quelques dizaines de Mo) ne justifie pas de purge.
-- **Sauvegarde** : `pnpm db:backup` → `pg_dump -Fc` dans `./backups/jobhunt-AAAA-MM-JJ.dump` (dossier ignoré par git), en gardant les 8 derniers. À lancer une fois par semaine ; l'UI affiche la date de la dernière sauvegarde (`worker_heartbeat.last_backup_at`, mis à jour par le script). Restauration : `pg_restore -c -d jobhunt <fichier>`.
+- **Sauvegarde** : `pnpm db:backup` → `pg_dump -Fc` dans `./backups/jobhunt-AAAA-MM-JJ.dump` (dossier ignoré par git), en gardant les 8 derniers. Le `pg_dump` du poste est utilisé s'il existe, sinon celui du conteneur (`docker compose exec -T db pg_dump`). À lancer une fois par semaine ; l'UI affiche la date de la dernière sauvegarde (`worker_heartbeat.last_backup_at`). Restauration : `docker compose exec -T db pg_restore -U jobhunt -d jobhunt --clean < backups/<fichier>.dump`.
 
 ### Application
 
@@ -917,4 +916,4 @@ Pas de génération d'adresses par motif, pas de vérification SMTP (`RCPT TO`, 
 - Démarrage : `pnpm dev` lance `web` et `worker` en parallèle (`pnpm -r --parallel dev`). Au quotidien, `pnpm start:all` lance le build de production et les deux process.
 - Lancement automatique au démarrage de Windows : **reporté**. Le signal pour s'y mettre : oublier de lancer le worker plus d'une fois par semaine. La solution sera une tâche planifiée Windows qui exécute `pnpm start:all`.
 - Journaux : `console` structuré (JSON en production, lisible en développement) via un petit `logger` dans `core`. Pas de pino tant que ce n'est pas nécessaire.
-- Prérequis machine : Node 24 LTS, pnpm et PostgreSQL 18. Pas de Docker.
+- Prérequis machine : Node 24 LTS, pnpm (corepack) et Docker Desktop (WSL2), qui n'exécute que la base.

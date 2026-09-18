@@ -51,7 +51,7 @@ Organisation de `packages/core` (exports par sous-chemin, voir `package.json#exp
 6. **Prompts LLM versionnés** (`packages/core/prompts/`) : un prompt utilisé n'est jamais modifié. Pour le changer, créer `scoring.v2.md` et incrémenter la constante correspondante dans `scoring/config.ts` (le cache se réinvalide proprement).
 9. **Pas de fonction passée d'un Server Component à un Client Component** (hors server actions liées par `.bind`). Un retour à afficher passe par `{ message }` dans le résultat de l'action (voir `ActionButton`).
 10. **Sous-requêtes SQL corrélées** : qualifier explicitement les colonnes externes (`"companies"."id"`), Drizzle ne préfixe pas les colonnes d'une requête sans jointure.
-7. **Tout est local** (ADR-005, ADR-008) : PostgreSQL 18 natif sur `localhost`, app sur `127.0.0.1`, pas d'authentification (sauf le token de `/api/capture`). Ne rien introduire qui suppose un hébergement (Docker, service cloud) sans nouvel ADR.
+7. **Tout est local** (ADR-005, ADR-008) : PostgreSQL 18 dans Docker Compose sur `127.0.0.1:5432`, app sur `127.0.0.1`, pas d'authentification (sauf le token de `/api/capture`). Ne rien introduire qui suppose un hébergement distant sans nouvel ADR.
 8. **Pas de store client, pas de TanStack Query** : lectures en Server Components, mutations en server actions renvoyant `ActionResult<T>`.
 
 ## Conventions
@@ -87,7 +87,8 @@ Organisation de `packages/core` (exports par sous-chemin, voir `package.json#exp
 ## Commandes
 
 ```bash
-# Prérequis : PostgreSQL 18 (service Windows, winget PostgreSQL.PostgreSQL.18), base et rôle "jobhunt"
+# Prérequis : Docker Desktop (WSL2)
+docker compose up -d            # PostgreSQL 18 sur 127.0.0.1:5432 (volume jobhunt-pgdata)
 pnpm install
 pnpm db:generate                # drizzle-kit generate (après modification du schéma)
 pnpm db:migrate                 # applique les migrations
@@ -114,4 +115,4 @@ Avant de considérer une tâche finie : `pnpm typecheck && pnpm lint && pnpm tes
 
 Node 24 LTS, pnpm 12 (épinglé via `packageManager`, fourni par corepack).
 
-**Poste Windows de Robin** : Smart App Control est actif et bloque les binaires non signés. PostgreSQL 18.6 (EDB) est bloqué (`libcrypto-3-x64.dll`, code `C0E90002`) : voir ADR-008. Les binaires de l'outillage (tsc 7, Biome, esbuild, SWC) fonctionnent.
+**Poste Windows de Robin** : Smart App Control est actif et bloque les binaires non signés. PostgreSQL 18.6 (EDB) ne démarre pas (`libcrypto-3-x64.dll`, code `C0E90002`), d'où la base dans Docker (ADR-008). Les binaires de l'outillage (tsc 7, Biome, esbuild, SWC) fonctionnent, comme Docker Desktop (signé).

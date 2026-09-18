@@ -1,5 +1,5 @@
-import { execFile } from "node:child_process";
-import { mkdirSync, readdirSync, unlinkSync } from "node:fs";
+import { execFile, spawn } from "node:child_process";
+import { createWriteStream, mkdirSync, readdirSync, unlinkSync } from "node:fs";
 import { join } from "node:path";
 import { promisify } from "node:util";
 import { lt, sql } from "drizzle-orm";
@@ -61,23 +61,59 @@ export function isWorkerStale(lastTickAt: Date | null, now = new Date()): boolea
 }
 
 const KEEP_BACKUPS = 8;
+/** Service et rôle définis dans docker-compose.yml. */
+const DB_SERVICE = "db";
+const DB_ROLE = "jobhunt";
 
-/** pg_dump -Fc dans ./backups (garde les 8 derniers). pg_dump doit être dans le PATH. */
+/** `docker compose exec` écrit le dump sur stdout ; on le redirige vers le fichier. */
+async function dumpViaDocker(file: string): Promise<void> {
+  const out = createWriteStream(file);
+  await new Promise<void>((resolve, reject) => {
+    const child = spawn(
+      "docker",
+      ["compose", "exec", "-T", DB_SERVICE, "pg_dump", "--format=custom", "-U", DB_ROLE, "-d", DB_ROLE],
+      { cwd: repoRoot(), stdio: ["ignore", "pipe", "pipe"] },
+    );
+    let stderr = "";
+    child.stderr.on("data", (chunk) => {
+      stderr += String(chunk);
+    });
+    child.stdout.pipe(out);
+    child.on("error", reject);
+    child.on("close", (code) => {
+      out.close();
+      if (code === 0) resolve();
+      else reject(new Error(`docker compose exec pg_dump a échoué (code ${code}) : ${stderr.slice(0, 300)}`));
+    });
+  });
+}
+
+/** pg_dump -Fc dans ./backups (garde les 8 derniers) : celui du poste s'il existe, sinon celui du conteneur. */
 export async function backupDatabase(): Promise<string> {
   const dir = join(repoRoot(), "backups");
   mkdirSync(dir, { recursive: true });
   const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-");
   const file = join(dir, `jobhunt-${stamp}.dump`);
+  const isEnoent = (err: unknown) => (err as NodeJS.ErrnoException).code === "ENOENT";
   try {
+    // 1. pg_dump du poste, s'il est installé.
     await run("pg_dump", ["--format=custom", `--file=${file}`, `--dbname=${env().DATABASE_URL}`], {
       timeout: 5 * 60_000,
     });
   } catch (err) {
-    const code = (err as NodeJS.ErrnoException).code;
-    if (code === "ENOENT") {
-      throw new Error("pg_dump introuvable : ajoute C:\\Program Files\\PostgreSQL\\18\\bin au PATH");
+    if (!isEnoent(err)) throw err;
+    // 2. Sinon, celui du conteneur (docker compose, ADR-008).
+    try {
+      await dumpViaDocker(file);
+    } catch (dockerErr) {
+      if (isEnoent(dockerErr)) {
+        throw new Error(
+          "Sauvegarde impossible : ni pg_dump ni docker sur le PATH. Démarre la base (docker compose up -d) " +
+            "ou installe les outils client PostgreSQL.",
+        );
+      }
+      throw dockerErr;
     }
-    throw err;
   }
   const dumps = readdirSync(dir)
     .filter((f) => /^jobhunt-.*\.dump$/.test(f))
