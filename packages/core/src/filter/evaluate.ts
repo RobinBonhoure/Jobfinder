@@ -6,6 +6,7 @@ export interface FilterInput {
   title: string;
   descriptionText: string;
   companyName: string | null;
+  locationRaw: string | null;
   remotePolicy: RemotePolicy;
   remoteScope: RemoteScope;
   contractType: ContractType;
@@ -36,11 +37,15 @@ function regexes(c: FilterCriteria): Record<string, RegExp[]> {
       titleEx: mk(c.titleExclusions),
       descEx: mk(c.descriptionExclusions),
       seniorityEx: mk(c.seniorityTitleExclusions),
+      local: mk(c.localLocations),
     };
     compiled.set(c, r);
   }
   return r;
 }
+
+/** Hybride ou présentiel accepté parce que localisé près de chez Robin. */
+export const HYBRID_LOCAL_FLAG = "remote:hybrid_local";
 
 const EXCLUDED_CONTRACTS: ReadonlySet<ContractType> = new Set([
   "internship",
@@ -68,8 +73,12 @@ export function evaluateJob(
   if (EXCLUDED_CONTRACTS.has(job.contractType)) reasons.push(`contract:${job.contractType}`);
   if (job.contractType === "unknown") flags.push("contract:unknown");
 
-  if (job.remotePolicy === "hybrid" || job.remotePolicy === "onsite")
-    reasons.push(`remote:${job.remotePolicy}`);
+  // Hybride/présentiel : rejeté, sauf près de chez Robin (signalé, classé sous le full remote).
+  const isLocal = Boolean(job.locationRaw && rx.local?.some((re) => re.test(fold(job.locationRaw ?? ""))));
+  if (job.remotePolicy === "hybrid" || job.remotePolicy === "onsite") {
+    if (isLocal) flags.push(HYBRID_LOCAL_FLAG);
+    else reasons.push(`remote:${job.remotePolicy}`);
+  }
   if (job.remotePolicy === "unknown") flags.push("remote:unknown");
 
   if (criteria.rejectRemoteScopes.includes(job.remoteScope)) reasons.push(`geo:${job.remoteScope}`);
@@ -98,6 +107,8 @@ export function evaluateJob(
   score += Math.min((rx.preferred ?? []).filter((re) => re.test(all)).length, 2) * 5;
   if (job.remotePolicy === "full_remote") score += 15;
   if (job.remoteScope === "france") score += 5;
+  // Idéal : full remote chez un employeur toulousain.
+  if (isLocal && job.remotePolicy !== "hybrid" && job.remotePolicy !== "onsite") score += 5;
   if (job.contractType === "cdi") score += 5;
   if (job.seniority === "senior" || job.seniority === "lead") score += 8;
   else if (job.seniority === "mid") score += 3;

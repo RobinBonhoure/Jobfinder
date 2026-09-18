@@ -12,6 +12,8 @@ export const FilterCriteria = z.object({
   descriptionExclusions: z.array(z.string()).default([]),
   seniorityTitleExclusions: z.array(z.string()).default([]),
   companyExclusions: z.array(z.string()).default([]),
+  /** Localisations « chez Robin » : bonus, et hybride/présentiel signalé au lieu d'être rejeté. */
+  localLocations: z.array(z.string()).default([]),
   rejectRemoteScopes: z.array(z.enum(REMOTE_SCOPES)).default(["other"]),
 });
 export type FilterCriteria = z.infer<typeof FilterCriteria>;

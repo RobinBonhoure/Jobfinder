@@ -1,5 +1,6 @@
 import { and, asc, desc, eq, gte, inArray, isNull, lte, notInArray, or, type SQL, sql } from "drizzle-orm";
 import type { SourceKind, TriageStatus } from "../../domain/enums";
+import { HYBRID_LOCAL_FLAG } from "../../filter/evaluate";
 import { PROMPT_VERSION, scoringModel } from "../../scoring/config";
 import { HIDING_CONTRACT_VERDICTS, HIDING_REMOTE_VERDICTS } from "../../scoring/schema";
 import { getDb } from "../client";
@@ -12,10 +13,19 @@ const scoreJoin = () =>
     eq(llmScores.model, scoringModel()),
   );
 
-/** Offres masquées par un verdict LLM éliminatoire. */
+/**
+ * Offres masquées par un verdict LLM éliminatoire. Un « hybride / sur site » reste visible
+ * quand le filtre l'a localisé près de chez Robin (flag HYBRID_LOCAL_FLAG).
+ */
 const hiddenByVerdict = () =>
   or(
-    inArray(llmScores.remoteVerdict, [...HIDING_REMOTE_VERDICTS]),
+    and(
+      inArray(llmScores.remoteVerdict, [...HIDING_REMOTE_VERDICTS]),
+      or(
+        sql`${llmScores.remoteVerdict} <> 'hybrid_or_onsite'`,
+        sql`not (${HYBRID_LOCAL_FLAG} = any(${jobs.filterFlags}))`,
+      ),
+    ),
     inArray(llmScores.contractVerdict, [...HIDING_CONTRACT_VERDICTS]),
   );
 

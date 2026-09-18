@@ -83,6 +83,7 @@ export async function refilterOpenJobs(): Promise<{ changed: number }> {
       title: jobs.title,
       descriptionText: jobs.descriptionText,
       companyName: jobs.companyNameRaw,
+      locationRaw: jobs.locationRaw,
       remotePolicy: jobs.remotePolicy,
       remoteScope: jobs.remoteScope,
       contractType: jobs.contractType,
@@ -93,7 +94,8 @@ export async function refilterOpenJobs(): Promise<{ changed: number }> {
     })
     .from(jobs)
     .where(and(sql`${jobs.closedAt} is null`, sql`${jobs.descriptionText} <> ''`));
-  const touched = new Set<string>();
+  let changed = 0;
+  const clusters = new Set<string>();
   for (const r of rows) {
     const advisory = r.forcedPass || r.sourceId === "capture";
     const res = evaluateJob(r, criteria, { advisory });
@@ -106,8 +108,11 @@ export async function refilterOpenJobs(): Promise<{ changed: number }> {
         ruleScore: res.ruleScore,
       })
       .where(eq(jobs.id, r.id));
-    if (res.status !== r.filterStatus && r.clusterId) touched.add(r.clusterId);
+    if (res.status !== r.filterStatus) changed++;
+    if (r.clusterId) clusters.add(r.clusterId);
   }
-  for (const id of touched) await refreshCluster(db, id);
-  return { changed: touched.size };
+  // Tous les clusters ouverts sont recalculés : prend aussi en compte un changement de prompt
+  // (PROMPT_VERSION) ou de modèle, qui remet en attente les scores absents du cache.
+  for (const id of clusters) await refreshCluster(db, id);
+  return { changed };
 }

@@ -56,6 +56,7 @@ export async function processJob(
       title: job.title,
       descriptionText: job.descriptionText,
       companyName: job.companyName,
+      locationRaw: job.locationRaw,
       remotePolicy: job.remotePolicy,
       remoteScope: job.remoteScope,
       contractType: job.contractType,
