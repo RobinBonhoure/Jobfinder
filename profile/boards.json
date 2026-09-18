@@ -1,0 +1,69 @@
+{
+  "$comment": "Registre de départ (pnpm --filter @jobhunt/worker seed-sources). Tokens vérifiés le 2026-09-17 (réponse non vide). À élaguer selon les offres qui passent le filtre — voir /sources.",
+  "boards": [
+    { "company": "Doctolib", "url": "https://jobs.ashbyhq.com/doctolib" },
+    { "company": "Alan", "url": "https://jobs.ashbyhq.com/alan" },
+    { "company": "Qonto", "url": "https://jobs.ashbyhq.com/qonto" },
+    { "company": "Pennylane", "url": "https://jobs.ashbyhq.com/pennylane" },
+    { "company": "Back Market", "url": "https://jobs.ashbyhq.com/backmarket" },
+    { "company": "Ledger", "url": "https://jobs.ashbyhq.com/ledger" },
+    { "company": "Swan", "url": "https://jobs.ashbyhq.com/swan" },
+    { "company": "Upflow", "url": "https://jobs.ashbyhq.com/upflow" },
+    { "company": "Sorare", "url": "https://jobs.ashbyhq.com/sorare" },
+    { "company": "Sunday", "url": "https://jobs.ashbyhq.com/sunday" },
+    { "company": "Ankorstore", "url": "https://jobs.ashbyhq.com/ankorstore" },
+    { "company": "Dust", "url": "https://jobs.ashbyhq.com/dust" },
+    { "company": "Photoroom", "url": "https://jobs.ashbyhq.com/photoroom" },
+    { "company": "Crisp", "url": "https://jobs.ashbyhq.com/crisp" },
+    { "company": "lemlist", "url": "https://jobs.ashbyhq.com/lemlist" },
+    { "company": "Twenty", "url": "https://jobs.ashbyhq.com/twenty" },
+    { "company": "Voodoo", "url": "https://jobs.ashbyhq.com/voodoo" },
+    { "company": "Swile", "url": "https://jobs.lever.co/swile" },
+    { "company": "Contentsquare", "url": "https://jobs.lever.co/contentsquare" },
+    { "company": "Aircall", "url": "https://jobs.lever.co/aircall" },
+    { "company": "Malt", "url": "https://jobs.lever.co/malt" },
+    { "company": "Brevo", "url": "https://jobs.lever.co/brevo" },
+    { "company": "Scaleway", "url": "https://jobs.lever.co/scaleway" },
+    { "company": "Agicap", "url": "https://jobs.lever.co/agicap" },
+    { "company": "Pigment", "url": "https://jobs.lever.co/pigment" },
+    { "company": "PlayPlay", "url": "https://jobs.lever.co/playplay" },
+    { "company": "Ogury", "url": "https://jobs.lever.co/ogury" },
+    { "company": "BlaBlaCar", "url": "https://jobs.lever.co/blablacar" },
+    { "company": "Heetch", "url": "https://jobs.lever.co/heetch" },
+    { "company": "Algolia", "url": "https://boards.greenhouse.io/algolia" },
+    { "company": "Mirakl", "url": "https://boards.greenhouse.io/mirakl" },
+    { "company": "Dataiku", "url": "https://boards.greenhouse.io/dataiku" },
+    { "company": "Livestorm", "url": "https://livestorm.recruitee.com" },
+    { "company": "Matera", "url": "https://matera.recruitee.com" }
+  ],
+  "feeds": [
+    {
+      "id": "jobicy:france",
+      "kind": "jobicy",
+      "label": "Jobicy — France (engineering)",
+      "config": { "geo": "france", "industry": "engineering" },
+      "enabled": true
+    },
+    {
+      "id": "france_travail:react-cdi",
+      "kind": "france_travail",
+      "label": "France Travail — react (CDI)",
+      "config": { "motsCles": "react", "typeContrat": "CDI" },
+      "enabled": false
+    },
+    {
+      "id": "france_travail:nextjs-cdi",
+      "kind": "france_travail",
+      "label": "France Travail — next.js (CDI)",
+      "config": { "motsCles": "next.js", "typeContrat": "CDI" },
+      "enabled": false
+    },
+    {
+      "id": "france_travail:typescript-cdi",
+      "kind": "france_travail",
+      "label": "France Travail — typescript (CDI)",
+      "config": { "motsCles": "typescript", "typeContrat": "CDI" },
+      "enabled": false
+    }
+  ]
+}

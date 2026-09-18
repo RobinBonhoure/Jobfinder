@@ -1,0 +1,47 @@
+{
+  "name": "@jobhunt/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./domain": "./src/domain/index.ts",
+    "./normalize": "./src/normalize/index.ts",
+    "./env": "./src/env.ts",
+    "./logger": "./src/logger.ts",
+    "./db": "./src/db/index.ts",
+    "./http": "./src/http/client.ts",
+    "./sources": "./src/sources/index.ts",
+    "./ingest": "./src/ingest/index.ts",
+    "./filter": "./src/filter/index.ts",
+    "./scoring": "./src/scoring/index.ts",
+    "./capture": "./src/capture/index.ts",
+    "./applications": "./src/applications/index.ts",
+    "./companies": "./src/companies/index.ts",
+    "./contacts": "./src/contacts/index.ts",
+    "./outreach": "./src/outreach/index.ts",
+    "./maintenance": "./src/maintenance/index.ts",
+    "./paths": "./src/paths.ts",
+    "./profile": "./src/profile.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.126.0",
+    "dotenv": "17.4.2",
+    "drizzle-orm": "0.45.2",
+    "fast-xml-parser": "5.11.1",
+    "linkedom": "0.18.13",
+    "postgres": "3.4.9",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.5",
+    "drizzle-kit": "0.31.10",
+    "typescript": "7.0.2",
+    "vitest": "5.0.1"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@jobhunt/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "ingest": "tsx src/cli/ingest.ts",
+    "score": "tsx src/cli/score.ts",
+    "backup": "tsx src/cli/backup.ts",
+    "purge-contacts": "tsx src/cli/purge-contacts.ts",
+    "seed-sources": "tsx src/cli/seed-sources.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "dry-run": "tsx src/cli/dry-run.ts",
+    "refilter": "tsx src/cli/refilter.ts"
+  },
+  "dependencies": {
+    "@jobhunt/core": "workspace:*",
+    "croner": "10.0.1",
+    "tsx": "4.23.13"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.5",
+    "typescript": "7.0.2"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "JobHunt — capture d'offre",
+  "version": "0.1.0",
+  "description": "Envoie l'offre affichée (texte visible ou sélection) à JobHunt en local. Aucune action automatique.",
+  "action": {
+    "default_title": "Envoyer cette offre à JobHunt"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_page": "options.html",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["http://127.0.0.1:3000/*", "http://localhost:3000/*"]
+}

@@ -1,0 +1,37 @@
+{
+  "resultats": [
+    {
+      "id": "198XKZQ",
+      "intitule": "Développeur Front-End React / Next.js H/F",
+      "description": "Au sein d'une équipe produit de 8 personnes, vous développerez notre application SaaS en React, Next.js et TypeScript. Poste en CDI, 100% télétravail possible depuis la France. 5 ans d'expérience minimum.",
+      "dateCreation": "2026-09-15T10:12:00.000Z",
+      "dateActualisation": "2026-09-16T08:00:00.000Z",
+      "lieuTravail": { "libelle": "31 - TOULOUSE", "latitude": 43.6, "longitude": 1.44, "codePostal": "31000", "commune": "31555" },
+      "romeCode": "M1805",
+      "romeLibelle": "Études et développement informatique",
+      "appellationlibelle": "Développeur / Développeuse web",
+      "entreprise": { "nom": "EXEMPLE SAAS", "entrepriseAdaptee": false },
+      "typeContrat": "CDI",
+      "typeContratLibelle": "Contrat à durée indéterminée",
+      "natureContrat": "Contrat travail",
+      "experienceExige": "E",
+      "experienceLibelle": "5 An(s)",
+      "salaire": { "libelle": "Annuel de 45000.00 Euros à 55000.00 Euros sur 12.0 mois" },
+      "dureeTravailLibelleConverti": "Temps plein",
+      "qualificationLibelle": "Cadre",
+      "origineOffre": { "origine": "1", "urlOrigine": "https://candidat.francetravail.fr/offres/recherche/detail/198XKZQ" }
+    },
+    {
+      "id": "198XKZR",
+      "intitule": "Développeur PHP Symfony (H/F)",
+      "description": "Mission longue chez notre client grand compte. Présentiel 3 jours par semaine.",
+      "dateCreation": "2026-09-15T11:00:00.000Z",
+      "dateActualisation": "2026-09-15T11:00:00.000Z",
+      "lieuTravail": { "libelle": "75 - PARIS 08", "codePostal": "75008" },
+      "typeContrat": "CDI",
+      "experienceExige": "D",
+      "origineOffre": { "origine": "1", "urlOrigine": "https://candidat.francetravail.fr/offres/recherche/detail/198XKZR" }
+    }
+  ],
+  "filtresPossibles": []
+}

@@ -1,0 +1,413 @@
+{
+  "offers": [
+    {
+      "position": 212,
+      "min_hours_per_week": null,
+      "options_photo": "off",
+      "salary": {
+        "max": null,
+        "min": null,
+        "period": null,
+        "currency": null
+      },
+      "options_cover_letter": "off",
+      "updated_at": "2026-09-16 23:31:24 UTC",
+      "location": "Boston, Massachusetts, United States",
+      "options_title": "off",
+      "min_hours": null,
+      "created_at": "2026-09-16 23:23:53 UTC",
+      "options_salutation": "off",
+      "category_code": "security",
+      "education_code": "bachelor_degree",
+      "careers_apply_url": "https://aikidosecurity.recruitee.com/o/account-executive-us-federal/c/new",
+      "country": "United States",
+      "state_code": "MA",
+      "sharing_description": "🌍 We’re making security suck less for developers.Security tools haven’t kept up with how software is built today. They interrupt teams, slow releases, and turn security into a bottleneck instead of a ",
+      "max_hours_per_week": null,
+      "options_cv": "required",
+      "location_question_visible": false,
+      "sharing_title": "Account Executive, US Federal",
+      "country_code": "US",
+      "company_name": "Aikido Security",
+      "published_at": "2026-09-16 23:31:24 UTC",
+      "hybrid": true,
+      "locations_question": "What is your preferred work location?",
+      "highlight": null,
+      "open_questions": [
+        {
+          "id": 4375691,
+          "position": 1,
+          "options": {},
+          "required": false,
+          "body": "LinkedIn URL",
+          "kind": "string",
+          "translations": {
+            "en": {
+              "body": "LinkedIn URL"
+            }
+          },
+          "open_question_options": []
+        },
+        {
+          "id": 4375692,
+          "position": 2,
+          "options": {},
+          "required": true,
+          "body": "Are you located in Boston or the DMV (DC, Maryland, Virginia) area OR willing to relocate?",
+          "kind": "boolean",
+          "translations": {
+            "en": {
+              "body": "Are you located in Boston or the DMV (DC, Maryland, Virginia) area OR willing to relocate?"
+            }
+          },
+          "open_question_options": []
+        },
+        {
+          "id": 4375693,
+          "position": 3,
+          "options": {},
+          "required": false,
+          "body": "What are your salary expectations (base + variable)?",
+          "kind": "string",
+          "translations": {
+            "en": {
+              "body": "What are your salary expectations (base + variable)?"
+            }
+          },
+          "open_question_options": []
+        }
+      ],
+      "experience_code": "experienced",
+      "on_site": false,
+      "description": "<p class=\"MsoNormal\"><strong>🌍 We’re making security suck less for developers.</strong></p><p class=\"MsoNormal\">Security tools haven’t kept up with how software is built today. They interrupt teams, slow releases, and turn security into a bottleneck instead of a capability. We built Aikido to change that. Aikido builds developer-first security products that reduce real risk without getting in the way of shipping software. We focus on what actually matters and automate the rest.</p><p class=\"MsoNormal\">We’re taking on legacy security tools teams have been stuck with, and we’re winning. If you want to help us take market share and build products developers actually enjoy using, you’re in the right place.</p><p class=\"MsoNormal\"><br>Founded in 2022 by third-time founders, Aikido has $85M in the bank and a long runway ahead. We’re building toward self-securing software. Join an all-star team. Take real ownership. Push boundaries. Build things that matter.</p><p class=\"MsoNormal\" style=\"min-height: 1.7em;\"></p><p class=\"MsoNormal\">We’re looking for an Account Executive to help build and scale our federal go-to-market motion. Since we’re still early, this is not a standard AE role. You’ll be selling, shaping processes, and influences strategy that will help us establish credibility in a highly specialized public sector and defense market. </p><p><strong><br><br></strong>Responsibilities</p><ul><li><p style=\"text-align:start;\">Manage complex federal sales opportunities</p></li><li><p style=\"text-align:start;\">Own relationships across government buyers, influencers, and stakeholders</p></li><li><p style=\"text-align:start;\">Prospect and build pipeline within federal accounts</p></li><li><p style=\"text-align:start;\">Navigate budgeting cycles, procurement processes, and regulatory constraints</p></li><li><p style=\"text-align:start;\">Help shape the public sector sales motion and broader growth initiatives</p></li></ul>",
+      "options_phone": "required",
+      "employment_type_code": "fulltime_permanent",
+      "guid": "stht5",
+      "dynamic_fields": [],
+      "remote": false,
+      "requirements": "<ul><li><p>Mid to Senior level Account Executive experience, with specific experience selling into Fed Gov</p></li><li><p>Experience with complex strategic sales cycles and executive-level engagement</p></li><li><p style=\"text-align:start;\">Able to “speak acronym” and operate fluently in government budgeting, program cycles, procurement, laws, and regulations</p></li><li><p style=\"text-align:start;\">Security experience strongly preferred</p></li><li><p style=\"text-align:start;\">Self-starter who can operate independently in a startup within a startup</p></li><li><p style=\"text-align:start;\">Hungry and 'get stuff done' mentality</p></li></ul><p style=\"min-height: 1.7em;\"></p><p>What you can expect</p><ul><li><p>Short decision lines. Big ownership. Shape the projects that matter and ship fast.</p></li><li><p>Grow as fast as we do. Take on more, own more, and carve out your own path.</p></li><li><p>Top-tier tech pay and equity.</p></li><li><p>High trust, strong values, zero corporate BS.</p></li><li><p>Flexibility in working hours.</p></li><li><p>A company that sticks to its values in an open and informal atmosphere.</p><p style=\"min-height: 1.7em;\"></p></li></ul><p>We hire for talent, drive, and potential. Everything else is noise.</p>",
+      "title": "Account Executive, US Federal",
+      "department": "Sales",
+      "state_name": "Massachusetts",
+      "city": "Boston",
+      "cover_image": null,
+      "careers_url": "https://aikidosecurity.recruitee.com/o/account-executive-us-federal",
+      "id": 2748725,
+      "locations_question_required": true,
+      "locations": [
+        {
+          "id": 297138,
+          "name": "Boston",
+          "state": "Massachusetts",
+          "country": "United States",
+          "city": "Boston",
+          "translations": {
+            "en": {
+              "name": "Boston",
+              "city": "Boston",
+              "postal_code": null,
+              "street": null,
+              "note": null
+            }
+          },
+          "country_code": "US",
+          "postal_code": null,
+          "state_code": "MA",
+          "street": null,
+          "note": null
+        }
+      ],
+      "translations": {
+        "en": {
+          "description": "<p class=\"MsoNormal\"><strong>🌍 We’re making security suck less for developers.</strong></p><p class=\"MsoNormal\">Security tools haven’t kept up with how software is built today. They interrupt teams, slow releases, and turn security into a bottleneck instead of a capability. We built Aikido to change that. Aikido builds developer-first security products that reduce real risk without getting in the way of shipping software. We focus on what actually matters and automate the rest.</p><p class=\"MsoNormal\">We’re taking on legacy security tools teams have been stuck with, and we’re winning. If you want to help us take market share and build products developers actually enjoy using, you’re in the right place.</p><p class=\"MsoNormal\"><br>Founded in 2022 by third-time founders, Aikido has $85M in the bank and a long runway ahead. We’re building toward self-securing software. Join an all-star team. Take real ownership. Push boundaries. Build things that matter.</p><p class=\"MsoNormal\" style=\"min-height: 1.7em;\"></p><p class=\"MsoNormal\">We’re looking for an Account Executive to help build and scale our federal go-to-market motion. Since we’re still early, this is not a standard AE role. You’ll be selling, shaping processes, and influences strategy that will help us establish credibility in a highly specialized public sector and defense market. </p><p><strong><br><br></strong>Responsibilities</p><ul><li><p style=\"text-align:start;\">Manage complex federal sales opportunities</p></li><li><p style=\"text-align:start;\">Own relationships across government buyers, influencers, and stakeholders</p></li><li><p style=\"text-align:start;\">Prospect and build pipeline within federal accounts</p></li><li><p style=\"text-align:start;\">Navigate budgeting cycles, procurement processes, and regulatory constraints</p></li><li><p style=\"text-align:start;\">Help shape the public sector sales motion and broader growth initiatives</p></li></ul>",
+          "title": "Account Executive, US Federal",
+          "highlight": null,
+          "sharing_image": "https://recruitee-main.s3.eu-central-1.amazonaws.com/offers/2748725/normal_sharing_c425rd1k861m.jpg",
+          "requirements": "<ul><li><p>Mid to Senior level Account Executive experience, with specific experience selling into Fed Gov</p></li><li><p>Experience with complex strategic sales cycles and executive-level engagement</p></li><li><p style=\"text-align:start;\">Able to “speak acronym” and operate fluently in government budgeting, program cycles, procurement, laws, and regulations</p></li><li><p style=\"text-align:start;\">Security experience strongly preferred</p></li><li><p style=\"text-align:start;\">Self-starter who can operate independently in a startup within a startup</p></li><li><p style=\"text-align:start;\">Hungry and 'get stuff done' mentality</p></li></ul><p style=\"min-height: 1.7em;\"></p><p>What you can expect</p><ul><li><p>Short decision lines. Big ownership. Shape the projects that matter and ship fast.</p></li><li><p>Grow as fast as we do. Take on more, own more, and carve out your own path.</p></li><li><p>Top-tier tech pay and equity.</p></li><li><p>High trust, strong values, zero corporate BS.</p></li><li><p>Flexibility in working hours.</p></li><li><p>A company that sticks to its values in an open and informal atmosphere.</p><p style=\"min-height: 1.7em;\"></p></li></ul><p>We hire for talent, drive, and potential. Everything else is noise.</p>",
+          "locations_question": "What is your preferred work location?",
+          "sharing_description": "🌍 We’re making security suck less for developers.Security tools haven’t kept up with how software is built today. They interrupt teams, slow releases, and turn security into a bottleneck instead of a ",
+          "sharing_title": "Account Executive, US Federal"
+        }
+      },
+      "postal_code": null,
+      "mailbox_email": "job.stht5@aikidosecurity.recruitee.com",
+      "locations_question_type": "multiple_choice",
+      "status": "published",
+      "sharing_image": "https://recruitee-main.s3.eu-central-1.amazonaws.com/offers/2748725/normal_sharing_c425rd1k861m.jpg",
+      "tags": [],
+      "slug": "account-executive-us-federal",
+      "max_hours": null,
+      "close_at": null
+    },
+    {
+      "position": 211,
+      "min_hours_per_week": null,
+      "options_photo": "off",
+      "salary": {
+        "max": null,
+        "min": null,
+        "period": null,
+        "currency": null
+      },
+      "options_cover_letter": "optional",
+      "updated_at": "2026-09-16 17:39:33 UTC",
+      "location": "Boston, Massachusetts, United States",
+      "options_title": "off",
+      "min_hours": null,
+      "created_at": "2026-09-16 17:19:36 UTC",
+      "options_salutation": "off",
+      "category_code": "engineering",
+      "education_code": "college_coursework",
+      "careers_apply_url": "https://aikidosecurity.recruitee.com/o/senior-cloud-engineer-govcloud-fedramp/c/new",
+      "country": "United States",
+      "state_code": "MA",
+      "sharing_description": "🌍 We’re making security suck less for developers.Security tools haven’t kept up with how software is built today. They interrupt teams, slow releases, and turn security into a bottleneck instead of a ",
+      "max_hours_per_week": null,
+      "options_cv": "required",
+      "location_question_visible": false,
+      "sharing_title": "Senior Cloud Engineer (GovCloud / FedRAMP)",
+      "country_code": "US",
+      "company_name": "Aikido Security",
+      "published_at": "2026-09-16 17:39:33 UTC",
+      "hybrid": true,
+      "locations_question": "What is your preferred work location?",
+      "highlight": null,
+      "open_questions": [
+        {
+          "id": 4375473,
+          "position": 1,
+          "options": {},
+          "required": true,
+          "body": "Are you currently in or near Boston or DC (or willing to relocate)?",
+          "kind": "multi_choice",
+          "translations": {
+            "en": {
+              "body": "Are you currently in or near Boston or DC (or willing to relocate)?"
+            }
+          },
+          "open_question_options": [
+            {
+              "id": 6735404,
+              "position": 0,
+              "body": "Yes",
+              "translations": {
+                "en": {
+                  "body": "Yes"
+                }
+              }
+            },
+            {
+              "id": 6735405,
+              "position": 1,
+              "body": "No",
+              "translations": {
+                "en": {
+                  "body": "No"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": 4375474,
+          "position": 2,
+          "options": {},
+          "required": true,
+          "body": "Will you now or in the future require sponsorship for employment authorization (e.g., H-1B, OPT, TN, etc.)",
+          "kind": "boolean",
+          "translations": {
+            "en": {
+              "body": "Will you now or in the future require sponsorship for employment authorization (e.g., H-1B, OPT, TN, etc.)"
+            }
+          },
+          "open_question_options": []
+        },
+        {
+          "id": 4375475,
+          "position": 3,
+          "options": {},
+          "required": true,
+          "body": "What are your total compensation expectations (base salary + variable/OTE) for your next role?",
+          "kind": "string",
+          "translations": {
+            "en": {
+              "body": "What are your total compensation expectations (base salary + variable/OTE) for your next role?"
+            }
+          },
+          "open_question_options": []
+        },
+        {
+          "id": 4375476,
+          "position": 4,
+          "options": {},
+          "required": true,
+          "body": "LinkedIn Profile",
+          "kind": "string",
+          "translations": {
+            "en": {
+              "body": "LinkedIn Profile"
+            }
+          },
+          "open_question_options": []
+        }
+      ],
+      "experience_code": "experienced",
+      "on_site": false,
+      "description": "<p><strong>🌍 We’re making security suck less for developers.</strong></p><p>Security tools haven’t kept up with how software is built today. They interrupt teams, slow releases, and turn security into a bottleneck instead of a capability. We built Aikido to change that. Aikido builds developer-first security products that reduce real risk without getting in the way of shipping software. We focus on what actually matters and automate the rest.</p><p>We’re taking on legacy security tools teams have been stuck with, and we’re winning. If you want to help us take market share and build products developers actually enjoy using, you’re in the right place.</p><p>Founded in 2022 by third-time founders, Aikido has $85M in the bank, a long runway ahead, and unicorn status. We’re building toward self-securing software. Join an all-star team. Take real ownership. Push boundaries. Build things that matter.</p><p style=\"min-height: 1.7em;\"></p><p>As a Senior Cloud Engineer at Aikido, you’ll own and operate the cloud infrastructure behind our U.S. public sector cloud environment. You’ll play a critical role in supporting our AWS GovCloud infrastructure, helping translate changes from the broader platform into a regulated environment, and servicing as a key technical operator on the front lines of our infrastructure. </p><p style=\"min-height: 1.7em;\"></p><p><strong>Responsibilities</strong></p><ul><li><p>Own and operate Aikido’s AWS GovCloud infrastructure in support of our FedRAMP environment.</p></li><li><p>Maintain and improve Kubernetes-based platform infrastructure for reliability, performance, and security.</p></li><li><p>Handle day-to-day cloud operations: deployments, updates, configuration changes, monitoring, and troubleshooting.</p></li><li><p>Support last-mile implementation work required to adapt and maintain a regulated version of Aikido’s broader platform.</p></li><li><p>Partner closely with leadership and Aikido cloud architecture to keep environments aligned while meeting government-specific constraints.</p></li><li><p>Respond to infrastructure and customer support needs that require hands-on access inside the U.S. regulated environment.</p></li><li><p>Help ensure operational readiness, resilience, and compliance as ASD scales its federal footprint</p></li></ul>",
+      "options_phone": "required",
+      "employment_type_code": "fulltime_permanent",
+      "guid": "d55vm",
+      "dynamic_fields": [],
+      "remote": false,
+      "requirements": "<ul><li><p>Strong hands-on experience with Kubernetes in production environments </p></li><li><p>Strong experience with AWS, ideally including AWS GovCloud</p></li><li><p>Experience operating and maintaining cloud infrastructure, not just designing it</p></li><li><p>Comfortable owning production systems, troubleshooting issues, and making pragmatic technical decisions quickly </p></li><li><p>Able to work independently in a fast-moving, high-ownership environment </p></li><li><p><strong>U.S. citizenship is required </strong>for access to the FedRAMP environment</p></li></ul><p style=\"text-align:start;min-height: 1.7em;\"></p><p style=\"text-align:start;\"><strong>Nice to have</strong></p><ul><li><p>Experience working in FedRAMP, federal, defense, or other regulated cloud environments.</p></li><li><p>Familiarity with compliance-driven infrastructure operations.</p></li><li><p>Experience partnering with distributed engineering teams to support mirrored or duplicated environments.</p></li><li><p>Background in security-focused infrastructure or cloud architecture.</p></li></ul><p style=\"min-height: 1.7em;\"></p><p><strong>What you can expect</strong></p><ul><li><p>Short decision lines. Big ownership. Shape the projects that matter and ship fast.</p></li><li><p>Grow as fast as we do. Take on more, own more, and carve out your own path.</p></li><li><p>Top-tier tech pay and equity.</p></li><li><p>High trust, strong values, zero corporate BS.</p></li><li><p>Flexibility in working hours.</p></li><li><p>A company that sticks to its values in an open and informal atmosphere.</p></li></ul><p>We hire for talent, drive, and potential. Everything else is noise.</p>",
+      "title": "Senior Cloud Engineer (GovCloud / FedRAMP)",
+      "department": "Engineering",
+      "state_name": "Massachusetts",
+      "city": "Boston",
+      "cover_image": null,
+      "careers_url": "https://aikidosecurity.recruitee.com/o/senior-cloud-engineer-govcloud-fedramp",
+      "id": 2748627,
+      "locations_question_required": true,
+      "locations": [
+        {
+          "id": 297138,
+          "name": "Boston",
+          "state": "Massachusetts",
+          "country": "United States",
+          "city": "Boston",
+          "translations": {
+            "en": {
+              "name": "Boston",
+              "city": "Boston",
+              "postal_code": null,
+              "street": null,
+              "note": null
+            }
+          },
+          "country_code": "US",
+          "postal_code": null,
+          "state_code": "MA",
+          "street": null,
+          "note": null
+        }
+      ],
+      "translations": {
+        "en": {
+          "description": "<p><strong>🌍 We’re making security suck less for developers.</strong></p><p>Security tools haven’t kept up with how software is built today. They interrupt teams, slow releases, and turn security into a bottleneck instead of a capability. We built Aikido to change that. Aikido builds developer-first security products that reduce real risk without getting in the way of shipping software. We focus on what actually matters and automate the rest.</p><p>We’re taking on legacy security tools teams have been stuck with, and we’re winning. If you want to help us take market share and build products developers actually enjoy using, you’re in the right place.</p><p>Founded in 2022 by third-time founders, Aikido has $85M in the bank, a long runway ahead, and unicorn status. We’re building toward self-securing software. Join an all-star team. Take real ownership. Push boundaries. Build things that matter.</p><p style=\"min-height: 1.7em;\"></p><p>As a Senior Cloud Engineer at Aikido, you’ll own and operate the cloud infrastructure behind our U.S. public sector cloud environment. You’ll play a critical role in supporting our AWS GovCloud infrastructure, helping translate changes from the broader platform into a regulated environment, and servicing as a key technical operator on the front lines of our infrastructure. </p><p style=\"min-height: 1.7em;\"></p><p><strong>Responsibilities</strong></p><ul><li><p>Own and operate Aikido’s AWS GovCloud infrastructure in support of our FedRAMP environment.</p></li><li><p>Maintain and improve Kubernetes-based platform infrastructure for reliability, performance, and security.</p></li><li><p>Handle day-to-day cloud operations: deployments, updates, configuration changes, monitoring, and troubleshooting.</p></li><li><p>Support last-mile implementation work required to adapt and maintain a regulated version of Aikido’s broader platform.</p></li><li><p>Partner closely with leadership and Aikido cloud architecture to keep environments aligned while meeting government-specific constraints.</p></li><li><p>Respond to infrastructure and customer support needs that require hands-on access inside the U.S. regulated environment.</p></li><li><p>Help ensure operational readiness, resilience, and compliance as ASD scales its federal footprint</p></li></ul>",
+          "title": "Senior Cloud Engineer (GovCloud / FedRAMP)",
+          "highlight": null,
+          "sharing_image": null,
+          "requirements": "<ul><li><p>Strong hands-on experience with Kubernetes in production environments </p></li><li><p>Strong experience with AWS, ideally including AWS GovCloud</p></li><li><p>Experience operating and maintaining cloud infrastructure, not just designing it</p></li><li><p>Comfortable owning production systems, troubleshooting issues, and making pragmatic technical decisions quickly </p></li><li><p>Able to work independently in a fast-moving, high-ownership environment </p></li><li><p><strong>U.S. citizenship is required </strong>for access to the FedRAMP environment</p></li></ul><p style=\"text-align:start;min-height: 1.7em;\"></p><p style=\"text-align:start;\"><strong>Nice to have</strong></p><ul><li><p>Experience working in FedRAMP, federal, defense, or other regulated cloud environments.</p></li><li><p>Familiarity with compliance-driven infrastructure operations.</p></li><li><p>Experience partnering with distributed engineering teams to support mirrored or duplicated environments.</p></li><li><p>Background in security-focused infrastructure or cloud architecture.</p></li></ul><p style=\"min-height: 1.7em;\"></p><p><strong>What you can expect</strong></p><ul><li><p>Short decision lines. Big ownership. Shape the projects that matter and ship fast.</p></li><li><p>Grow as fast as we do. Take on more, own more, and carve out your own path.</p></li><li><p>Top-tier tech pay and equity.</p></li><li><p>High trust, strong values, zero corporate BS.</p></li><li><p>Flexibility in working hours.</p></li><li><p>A company that sticks to its values in an open and informal atmosphere.</p></li></ul><p>We hire for talent, drive, and potential. Everything else is noise.</p>",
+          "locations_question": "What is your preferred work location?",
+          "sharing_description": "🌍 We’re making security suck less for developers.Security tools haven’t kept up with how software is built today. They interrupt teams, slow releases, and turn security into a bottleneck instead of a ",
+          "sharing_title": "Senior Cloud Engineer (GovCloud / FedRAMP)"
+        }
+      },
+      "postal_code": null,
+      "mailbox_email": "job.d55vm@aikidosecurity.recruitee.com",
+      "locations_question_type": "multiple_choice",
+      "status": "published",
+      "sharing_image": null,
+      "tags": [],
+      "slug": "senior-cloud-engineer-govcloud-fedramp",
+      "max_hours": null,
+      "close_at": null
+    },
+    {
+      "position": 210,
+      "min_hours_per_week": null,
+      "options_photo": "off",
+      "salary": {
+        "max": null,
+        "min": null,
+        "period": null,
+        "currency": null
+      },
+      "options_cover_letter": "off",
+      "updated_at": "2026-09-16 12:04:22 UTC",
+      "location": "Chicago, Illinois, United States",
+      "options_title": "off",
+      "min_hours": null,
+      "created_at": "2026-09-16 12:02:41 UTC",
+      "options_salutation": "off",
+      "category_code": "sales",
+      "education_code": "bachelor_degree",
+      "careers_apply_url": "https://aikidosecurity.recruitee.com/o/professional-services-consultant-us/c/new",
+      "country": "United States",
+      "state_code": "IL",
+      "sharing_description": "You’ll combine technical expertise with strong project management to coordinate all parties involved and get customers live, enabled, and successful.",
+      "max_hours_per_week": null,
+      "options_cv": "required",
+      "location_question_visible": false,
+      "sharing_title": "Professional Services Consultant US",
+      "country_code": "US",
+      "company_name": "Aikido Security",
+      "published_at": "2026-09-16 12:04:22 UTC",
+      "hybrid": false,
+      "locations_question": "What is your preferred work location?",
+      "highlight": null,
+      "open_questions": [],
+      "experience_code": "mid_level",
+      "on_site": true,
+      "description": "<p><strong>🌍 We’re making security suck less for developers.</strong></p><p>Security tools haven’t kept up with how software is built today. They interrupt teams, slow releases, and turn security into a bottleneck instead of a capability. We built Aikido to change that. Aikido builds developer-first security products that reduce real risk without getting in the way of shipping software. We focus on what actually matters and automate the rest.</p><p>We’re taking on legacy security tools teams have been stuck with, and we’re winning. If you want to help us take market share and build products developers actually enjoy using, you’re in the right place.</p><p>Founded in 2022 by third-time founders, Aikido has $85M in the bank and a long runway ahead. We’re building toward self-securing software. Join an all-star team. Take real ownership. Push boundaries. Build things that matter.</p><p style=\"min-height: 1.7em;\"></p><p>As part of <strong>Professional Services</strong>, you’ll own the successful delivery of Aikido for <strong>US customers</strong> with more complex requirements. You’ll combine technical expertise with strong project management to coordinate all parties involved and get customers live, enabled, and successful.</p><p style=\"min-height: 1.7em;\"></p><p>Responsibilities</p><ul><li><p>Own projects from kickoff through successful delivery.</p></li><li><p>Manage scope, milestones, stakeholders, dependencies, and timelines.</p></li><li><p>Coordinate technical delivery across the customer, Aikido, and other stakeholders.</p></li><li><p>Coordinate hardware dependencies where relevant.</p></li><li><p>Deliver technical training, runbooks, and architecture documentation.</p></li><li><p>Identify blockers early and drive them to resolution.</p></li></ul>",
+      "options_phone": "required",
+      "employment_type_code": "fulltime_permanent",
+      "guid": "3d6cg",
+      "dynamic_fields": [],
+      "remote": false,
+      "requirements": "<ul><li><p>Strong technical background with enterprise software and APIs.</p></li><li><p>Excellent project management skills for complex implementations.</p></li><li><p>Able to communicate clearly with technical and non-technical stakeholders.</p></li><li><p>Highly organized, pragmatic, and comfortable managing multiple projects.</p></li><li><p>Comfortable in a fast-moving environment with high ownership.</p></li></ul><p><br>What you can expect</p><ul><li><p>Short decision lines. Big ownership. Shape the projects that matter and ship fast.</p></li><li><p>Grow as fast as we do. Take on more, own more, and carve out your own path.</p></li><li><p>Top-tier tech pay and equity.</p></li><li><p>High trust, strong values, zero corporate BS.</p></li><li><p>Flexibility in working hours.</p></li><li><p>A company that sticks to its values in an open and informal atmosphere.</p></li></ul><p>We hire for talent, drive, and potential. Everything else is noise.</p><p style=\"min-height: 1.7em;\"></p>",
+      "title": "Professional Services Consultant US",
+      "department": "Sales",
+      "state_name": "Illinois",
+      "city": "Chicago",
+      "cover_image": null,
+      "careers_url": "https://aikidosecurity.recruitee.com/o/professional-services-consultant-us",
+      "id": 2748131,
+      "locations_question_required": true,
+      "locations": [
+        {
+          "id": 293870,
+          "name": "Chicago",
+          "state": "Illinois",
+          "country": "United States",
+          "city": "Chicago",
+          "translations": {
+            "en": {
+              "name": "Chicago",
+              "city": "Chicago",
+              "postal_code": null,
+              "street": null,
+              "note": null
+            }
+          },
+          "country_code": "US",
+          "postal_code": null,
+          "state_code": "IL",
+          "street": null,
+          "note": null
+        }
+      ],
+      "translations": {
+        "en": {
+          "description": "<p><strong>🌍 We’re making security suck less for developers.</strong></p><p>Security tools haven’t kept up with how software is built today. They interrupt teams, slow releases, and turn security into a bottleneck instead of a capability. We built Aikido to change that. Aikido builds developer-first security products that reduce real risk without getting in the way of shipping software. We focus on what actually matters and automate the rest.</p><p>We’re taking on legacy security tools teams have been stuck with, and we’re winning. If you want to help us take market share and build products developers actually enjoy using, you’re in the right place.</p><p>Founded in 2022 by third-time founders, Aikido has $85M in the bank and a long runway ahead. We’re building toward self-securing software. Join an all-star team. Take real ownership. Push boundaries. Build things that matter.</p><p style=\"min-height: 1.7em;\"></p><p>As part of <strong>Professional Services</strong>, you’ll own the successful delivery of Aikido for <strong>US customers</strong> with more complex requirements. You’ll combine technical expertise with strong project management to coordinate all parties involved and get customers live, enabled, and successful.</p><p style=\"min-height: 1.7em;\"></p><p>Responsibilities</p><ul><li><p>Own projects from kickoff through successful delivery.</p></li><li><p>Manage scope, milestones, stakeholders, dependencies, and timelines.</p></li><li><p>Coordinate technical delivery across the customer, Aikido, and other stakeholders.</p></li><li><p>Coordinate hardware dependencies where relevant.</p></li><li><p>Deliver technical training, runbooks, and architecture documentation.</p></li><li><p>Identify blockers early and drive them to resolution.</p></li></ul>",
+          "title": "Professional Services Consultant US",
+          "highlight": null,
+          "sharing_image": "https://recruitee-main.s3.eu-central-1.amazonaws.com/offers/2748131/normal_sharing_3w2p4cb3rvh1.jpg",
+          "requirements": "<ul><li><p>Strong technical background with enterprise software and APIs.</p></li><li><p>Excellent project management skills for complex implementations.</p></li><li><p>Able to communicate clearly with technical and non-technical stakeholders.</p></li><li><p>Highly organized, pragmatic, and comfortable managing multiple projects.</p></li><li><p>Comfortable in a fast-moving environment with high ownership.</p></li></ul><p><br>What you can expect</p><ul><li><p>Short decision lines. Big ownership. Shape the projects that matter and ship fast.</p></li><li><p>Grow as fast as we do. Take on more, own more, and carve out your own path.</p></li><li><p>Top-tier tech pay and equity.</p></li><li><p>High trust, strong values, zero corporate BS.</p></li><li><p>Flexibility in working hours.</p></li><li><p>A company that sticks to its values in an open and informal atmosphere.</p></li></ul><p>We hire for talent, drive, and potential. Everything else is noise.</p><p style=\"min-height: 1.7em;\"></p>",
+          "locations_question": "What is your preferred work location?",
+          "sharing_description": "You’ll combine technical expertise with strong project management to coordinate all parties involved and get customers live, enabled, and successful.",
+          "sharing_title": "Professional Services Consultant US"
+        }
+      },
+      "postal_code": null,
+      "mailbox_email": "job.3d6cg@aikidosecurity.recruitee.com",
+      "locations_question_type": "multiple_choice",
+      "status": "published",
+      "sharing_image": "https://recruitee-main.s3.eu-central-1.amazonaws.com/offers/2748131/normal_sharing_3w2p4cb3rvh1.jpg",
+      "tags": [],
+      "slug": "professional-services-consultant-us",
+      "max_hours": null,
+      "close_at": null
+    }
+  ]
+}

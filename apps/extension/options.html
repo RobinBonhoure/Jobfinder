@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>JobHunt — options</title>
+    <style>
+      body { font: 14px system-ui, sans-serif; max-width: 520px; margin: 32px auto; color: #18181b; }
+      label { display: block; margin: 12px 0 4px; font-weight: 600; }
+      input { width: 100%; padding: 6px 8px; box-sizing: border-box; border: 1px solid #d4d4d8; border-radius: 6px; }
+      button { margin-top: 16px; margin-right: 8px; padding: 6px 12px; border-radius: 6px; border: 1px solid #18181b; background: #18181b; color: #fff; cursor: pointer; }
+      button.secondary { background: #fff; color: #18181b; }
+      #status { margin-top: 12px; }
+      p.hint { color: #71717a; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <h1>JobHunt</h1>
+    <p class="hint">
+      Un clic sur l'icône envoie l'offre affichée (ou le texte sélectionné, s'il fait plus de 200 caractères) à votre
+      instance locale. Rien n'est envoyé sans clic.
+    </p>
+    <label for="apiUrl">URL de JobHunt</label>
+    <input id="apiUrl" type="url" placeholder="http://127.0.0.1:3000" />
+    <label for="token">Token de capture (CAPTURE_TOKEN du fichier .env)</label>
+    <input id="token" type="password" autocomplete="off" />
+    <button id="save" type="button">Enregistrer</button>
+    <button id="test" type="button" class="secondary">Tester la connexion</button>
+    <div id="status"></div>
+    <script src="options.js" type="module"></script>
+  </body>
+</html>

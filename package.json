@@ -1,0 +1,29 @@
+{
+  "name": "jobhunt",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.4.2",
+  "engines": {
+    "node": ">=24.12 <25"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @jobhunt/web --filter @jobhunt/worker dev",
+    "build": "pnpm --filter @jobhunt/web build",
+    "start:all": "pnpm build && pnpm --parallel --filter @jobhunt/web --filter @jobhunt/worker start",
+    "ingest": "pnpm --filter @jobhunt/worker ingest",
+    "score": "pnpm --filter @jobhunt/worker score",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "db:generate": "pnpm --filter @jobhunt/core db:generate",
+    "db:migrate": "pnpm --filter @jobhunt/core db:migrate",
+    "db:backup": "pnpm --filter @jobhunt/worker backup",
+    "db:purge-contacts": "pnpm --filter @jobhunt/worker purge-contacts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "@types/node": "24.13.5",
+    "typescript": "7.0.2"
+  }
+}
