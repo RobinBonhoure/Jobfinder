@@ -29,7 +29,7 @@ Organisation de `packages/core` (exports par sous-chemin, voir `package.json#exp
 - `src/clusters/` + `src/applications/` (tri, fusion, repêchage, pipeline), `src/capture/`, `src/companies/`, `src/contacts/`, `src/outreach/`, `src/maintenance/`
 - `src/http/client.ts` : client HTTP unique (retry, Retry-After, throttle par hôte, User-Agent)
 - `src/env.ts` : **seul** endroit qui lit `process.env` ; `src/paths.ts` / `src/profile.ts` : accès à `profile/`
-- `prompts/*.vN.md` : prompts LLM versionnés (`scoring`, `capture`, `outreach`)
+- `prompts/*.vN.md` : prompts LLM versionnés (`scoring`, `capture`, `outreach`, `cover-letter`)
 - `drizzle/` : migrations SQL générées (+ `0000_extensions.sql` écrite à la main)
 - `test/` : unitaires (fixtures réelles) + `db.integration.test.ts` (base de test dédiée)
 

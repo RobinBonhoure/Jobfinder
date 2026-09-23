@@ -11,7 +11,7 @@ import { errorMessage } from "../logger";
 import { htmlToText } from "../normalize/text";
 import { CANDIDATE, loadCv } from "../profile";
 import { getAnthropic, isTransientLlmError } from "../scoring/anthropic";
-import { OUTREACH_PROMPT_VERSION, outreachModel } from "../scoring/config";
+import { OUTREACH_PROMPT_VERSION, outreachModel, WRITING_REQUEST } from "../scoring/config";
 import { loadPrompt, render } from "../scoring/prompt";
 
 const Draft = z.object({
@@ -69,7 +69,7 @@ export async function generateOutreachDraft(companyId: string, contactId: string
   try {
     const res = await client.messages.parse({
       model: outreachModel(),
-      max_tokens: 2048,
+      max_tokens: WRITING_REQUEST.max_tokens,
       system: render(prompt.system, { CV: loadCv(), SIGNATURE: signature() }),
       messages: [
         {
@@ -86,7 +86,7 @@ export async function generateOutreachDraft(companyId: string, contactId: string
           }),
         },
       ],
-      output_config: { format: zodOutputFormat(Draft) },
+      output_config: { format: zodOutputFormat(Draft), effort: WRITING_REQUEST.effort },
     });
     const parsed = Draft.safeParse(res.parsed_output);
     if (!parsed.success) throw new DomainError("UPSTREAM", "Brouillon inexploitable, réessaie");

@@ -16,6 +16,7 @@ import { promoteCompanyAction, rescoreAction, rescueAction, setTriageAction } fr
 import { ActionButton } from "@/components/action-button";
 import { NextActionInput, NoteForm, StatusSelect } from "@/components/application-controls";
 import { CopyButton } from "@/components/copy-button";
+import { CoverLetter } from "@/components/cover-letter";
 import { MergeForm } from "@/components/merge-form";
 import { Badge, Banner, Card, ExternalLink, ScoreBadge } from "@/components/ui";
 import { ago, fmtDate, fmtSalary } from "@/lib/format";
@@ -113,6 +114,15 @@ export default async function JobPage({ params }: PageProps<"/jobs/[clusterId]">
 
         <Card title="Description">
           <div className="prose-job">{job.descriptionText || "Description non disponible."}</div>
+        </Card>
+
+        <Card title="Lettre de motivation">
+          <CoverLetter
+            clusterId={clusterId}
+            applicationId={application?.id ?? null}
+            subject={application?.draftSubject ?? ""}
+            body={application?.draftBody ?? ""}
+          />
         </Card>
       </div>
 

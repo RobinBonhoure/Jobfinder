@@ -9,6 +9,7 @@ import {
   updateApplicationStatus,
 } from "@jobhunt/core/applications";
 import { type ActionResult, APPLICATION_STATUSES } from "@jobhunt/core/domain";
+import { type CoverLetterResult, generateCoverLetter, saveCoverLetter } from "@jobhunt/core/outreach";
 import { z } from "zod";
 import { idSchema, parseForm, runAction } from "@/lib/action";
 
@@ -45,6 +46,32 @@ export async function setNextActionAction(applicationId: string, date: string) {
 
 export async function deleteApplicationAction(applicationId: string) {
   return runAction(() => deleteApplication(idSchema.parse(applicationId)));
+}
+
+export async function generateCoverLetterAction(
+  clusterId: string,
+  extra?: string,
+): Promise<ActionResult<CoverLetterResult & { message: string }>> {
+  return runAction(async () => {
+    const letter = await generateCoverLetter(
+      idSchema.parse(clusterId),
+      z.string().trim().max(1000).optional().parse(extra),
+    );
+    const message = letter.gaps.length
+      ? `Lettre générée · à préparer pour l'entretien : ${letter.gaps.join(", ")}`
+      : "Lettre générée";
+    return { ...letter, message };
+  });
+}
+
+export async function saveCoverLetterAction(applicationId: string, subject: string, body: string) {
+  return runAction(() =>
+    saveCoverLetter(
+      idSchema.parse(applicationId),
+      z.string().trim().min(1, "Objet requis").max(200).parse(subject),
+      z.string().trim().min(50, "Lettre trop courte").max(20_000).parse(body),
+    ),
+  );
 }
 
 const ExternalForm = z.object({

@@ -6,14 +6,15 @@ Recherche : CDI, **full remote** (France), front-end React/Next.js ou fullstack 
 ## Synthèse
 - 5 ans d'expérience front-end, dont 3 ans en React / Next.js en production.
 - Interfaces SaaS et dashboards, intégration d'API REST, paiement Stripe, messagerie temps réel (Mercure).
-- Côté serveur : NestJS et Express (formation Node.js complète en 2026, projet fullstack Next.js + NestJS déployé).
+- Côté serveur : routes Next.js, NestJS et Express (formation Node.js complète en 2026, projet fullstack Next.js + NestJS déployé).
+- Modération de contenu par IA (descriptions utilisateurs et photos) branchée sur le back Next.js.
 - Sensibilité 3D / créative : WebGL, Three.js (Three.js Journey).
 
 ## Compétences
-- **Front** : React, Next.js (App Router), TypeScript, JavaScript, Tailwind CSS, SCSS
-- **État** : Redux, Zustand
-- **Back** : Node.js, NestJS, Express, API REST
-- **Fonctionnel** : paiement Stripe, temps réel (Mercure), dashboards, interfaces SaaS
+- **Front** : React, Next.js (App Router), TypeScript, JavaScript, Tailwind CSS (3 ans), MUI (3 ans), SCSS
+- **Données & état** : TanStack Query / React Query (3 ans), Context React (3 ans), Zustand (3 ans), Redux
+- **Back** : Next.js (route handlers, server actions), Node.js, NestJS, Express, API REST
+- **Fonctionnel** : paiement Stripe, temps réel (Mercure), modération de contenu par IA (texte et images), dashboards, interfaces SaaS
 - **3D** : WebGL, Three.js
 - **Autres** : Python, C++, Shell (stage de recherche)
 
@@ -21,6 +22,8 @@ Recherche : CDI, **full remote** (France), front-end React/Next.js ou fullstack 
 ### Développeur front-end Next.js — Emprunte mon toutou (2024 – 2026)
 - Développement front-end Next.js d'une plateforme de mise en relation.
 - Intégration d'API REST, paiement Stripe, messagerie temps réel (Mercure).
+- État serveur avec TanStack Query ; UI en Tailwind CSS et MUI.
+- Côté back Next.js : modération automatique par IA des descriptions et des photos publiées par les utilisateurs.
 
 ### Développeur front-end — Melting.k, agence (alternance, 2021 – 2023)
 - Plus de 15 projets clients livrés, dont des expériences WebGL.

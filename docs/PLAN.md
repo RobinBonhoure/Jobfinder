@@ -680,6 +680,16 @@ Avec 50 à 100 offres par semaine après filtre (une estimation, à mesurer), on
 
 `llm_scores.input_tokens` et `output_tokens` permettent d'afficher le coût réel sur `/sources`. La Batch API (−50 %) n'en vaut pas la complexité à ce volume.
 
+### 7.7 Lettre de motivation (`core/outreach/cover-letter.ts`)
+
+Bouton « Générer la lettre de motivation » sur la fiche d'une offre. Appel synchrone au modèle `OUTREACH_MODEL` (Sonnet, quelques centimes, déclenché par Robin seulement), prompt `cover-letter.v1.md`, sortie structurée `{ subject, body, talking_points[], gaps[] }`.
+
+- Entrée : CV, annonce canonique (intitulé, entreprise, lieu, remote, contrat, salaire, description tronquée à 12 000 caractères) et le `hook` du scoring quand il existe.
+- Sortie rangée dans `applications.draft_subject` / `draft_body` — mêmes colonnes que le module B, **aucune table ni migration** ; l'`application(kind=job)` est créée au statut `to_apply` si elle n'existe pas, ce qui fait passer le cluster en « intéressé ».
+- `gaps` (exigences de l'offre absentes du CV) n'entre **pas** dans la lettre : c'est un pense-bête d'entretien, affiché sous l'éditeur.
+- Pas de cache : une lettre est relue et retouchée à la main, la régénérer est un choix explicite qui écrase le brouillon (confirmation).
+- Le prompt interdit d'inventer une expérience ou une techno absente du CV : le texte reste vérifiable en entretien.
+
 ---
 
 ## 8. Contrats d'API
@@ -767,6 +777,8 @@ type ActionResult<T> =
 | `discoverContacts` (B) | `companyId` | Crawl borné du site (§9.2), 5 à 20 s. | `UPSTREAM` |
 | `addManualContact` (B) | `companyId`, `email`, `kind`, `label`, `sourceNote` | | `VALIDATION` (MX invalide) |
 | `deleteContact` (B) | `contactId` | `deleted_at = now()` | |
+| `generateCoverLetter` | `clusterId`, `extra?` | Rédige la lettre de motivation de l'offre (§7.7) et l'écrit dans `applications.draft_subject` / `draft_body` ; crée l'`application(kind=job, status=to_apply)` si elle n'existe pas. | `VALIDATION` (clé API absente, description trop courte), `UPSTREAM` |
+| `saveCoverLetter` | `applicationId`, `subject`, `body` | Enregistre la lettre corrigée à la main. | `NOT_FOUND` |
 | `generateOutreachDraft` (B) | `companyId`, `contactId` | Crée ou met à jour l'`application(kind=spontaneous)` avec le brouillon. | `UPSTREAM` |
 | `markOutreachSent` (B) | `applicationId` | `status = applied`, événement `sent`, `info_notice_sent_at` si le contact est nominatif. | |
 

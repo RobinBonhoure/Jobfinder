@@ -38,6 +38,8 @@
   "preferredStack": [
     "\\breact(?:\\.?js)?\\b|\\bnext\\.?js\\b",
     "\\btailwind",
+    "\\bmui\\b|\\bmaterial ui\\b",
+    "\\btanstack\\b|\\breact query\\b",
     "\\bzustand\\b|\\bredux\\b",
     "\\bstripe\\b",
     "\\bthree\\.?js\\b|\\bwebgl\\b",
