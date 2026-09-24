@@ -1,20 +1,24 @@
 import { listClusters } from "@jobhunt/core/db";
-import { JobTable } from "@/components/job-table";
-import { EmptyState, PageHeader } from "@/components/ui";
+import { TriageView } from "@/components/triage-view";
+import { EmptyState } from "@/components/ui";
 
-export default async function InterestingPage() {
+const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
+
+export default async function InterestingPage({ searchParams }: PageProps<"/interesting">) {
+  const sp = await searchParams;
   const rows = await listClusters({ triage: ["interested"], includeHidden: true });
   return (
-    <>
-      <PageHeader
-        title="À postuler"
-        subtitle="Offres marquées « intéressé ». Ouvre la fiche pour créer la candidature, ou appuie sur « a » une fois postulé."
-      />
-      {rows.length === 0 ? (
-        <EmptyState title="Aucune offre en attente de candidature." />
-      ) : (
-        <JobTable rows={rows} />
-      )}
-    </>
+    <TriageView
+      rows={rows}
+      selectedId={one(sp.sel)}
+      title="À postuler"
+      subtitle={`${rows.length} offre(s) marquée(s) « intéressé »`}
+      toolbar={
+        <p className="text-xs text-ink-3">
+          Prépare la lettre dans la fiche, puis appuie sur <kbd>a</kbd> une fois postulé.
+        </p>
+      }
+      empty={<EmptyState title="Aucune offre en attente de candidature." />}
+    />
   );
 }

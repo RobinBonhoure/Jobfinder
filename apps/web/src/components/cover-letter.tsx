@@ -73,7 +73,7 @@ export function CoverLetter({
           />
         </>
       ) : (
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-ink-3">
           Aucune lettre. La génération lit l'annonce et le CV de <code>profile/cv.md</code>, puis range le
           texte dans le brouillon de la candidature.
         </p>
@@ -113,15 +113,11 @@ export function CoverLetter({
       </div>
 
       {gaps.length > 0 && (
-        <p className="text-xs text-amber-700 dark:text-amber-400">
+        <p className="text-xs text-warn">
           Volontairement absent de la lettre, à préparer pour l'entretien : {gaps.join(" · ")}
         </p>
       )}
-      {message && (
-        <p className={`text-xs ${message.ok ? "text-zinc-500" : "text-red-700 dark:text-red-400"}`}>
-          {message.text}
-        </p>
-      )}
+      {message && <p className={`text-xs ${message.ok ? "text-ink-3" : "text-bad"}`}>{message.text}</p>}
     </div>
   );
 }

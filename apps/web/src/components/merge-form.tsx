@@ -16,8 +16,7 @@ export function MergeForm({
   const [target, setTarget] = useState("");
   const [pending, start] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  if (candidates.length === 0)
-    return <p className="text-xs text-zinc-500">Aucune offre proche à fusionner.</p>;
+  if (candidates.length === 0) return <p className="text-xs text-ink-3">Aucune offre proche à fusionner.</p>;
   return (
     <div className="flex flex-wrap items-center gap-2">
       <select
@@ -47,7 +46,7 @@ export function MergeForm({
       >
         Fusionner
       </button>
-      {error && <span className="text-xs text-red-700">{error}</span>}
+      {error && <span className="text-xs text-bad">{error}</span>}
     </div>
   );
 }

@@ -48,25 +48,25 @@ export function CompanySearch() {
           {pending ? "…" : "Rechercher"}
         </button>
       </form>
-      <p className="text-xs text-zinc-500">
+      <p className="text-xs text-ink-3">
         Source : API Recherche d'entreprises (data.gouv). Elle ne fournit ni site ni email : renseigne le site
         après ajout.
       </p>
-      {state && !state.ok && <p className="text-sm text-red-700">{state.message}</p>}
-      {state?.ok && state.data.length === 0 && <p className="text-sm text-zinc-500">Aucun résultat.</p>}
+      {state && !state.ok && <p className="text-sm text-bad">{state.message}</p>}
+      {state?.ok && state.data.length === 0 && <p className="text-sm text-ink-3">Aucun résultat.</p>}
       {state?.ok && state.data.length > 0 && (
-        <ul className="divide-y divide-zinc-100 rounded-md border border-zinc-200 text-sm dark:divide-zinc-800 dark:border-zinc-800">
+        <ul className="divide-y divide-line rounded-md border border-line text-sm">
           {state.data.map((hit) => (
             <li key={hit.siren} className="flex items-center justify-between gap-2 px-3 py-2">
               <span>
                 <span className="font-medium">{hit.name}</span>{" "}
-                <span className="text-xs text-zinc-500">
+                <span className="text-xs text-ink-3">
                   {hit.city ?? "?"} · NAF {hit.nafCode ?? "?"} · effectif {hit.headcountRange ?? "?"} · SIREN{" "}
                   {hit.siren}
                 </span>
               </span>
               {added[hit.siren] ? (
-                <span className="text-xs text-emerald-700">{added[hit.siren]}</span>
+                <span className="text-xs text-good">{added[hit.siren]}</span>
               ) : (
                 <button
                   type="button"
@@ -113,7 +113,7 @@ export function AddCompanyForm() {
       <button type="submit" className={buttonClass.primary} disabled={pending}>
         Ajouter
       </button>
-      {state && !state.ok && <p className="text-xs text-red-700 sm:col-span-3">{state.message}</p>}
+      {state && !state.ok && <p className="text-xs text-bad sm:col-span-3">{state.message}</p>}
     </form>
   );
 }
@@ -174,7 +174,7 @@ export function CompanyEditor({
         <button type="submit" className={buttonClass.secondary} disabled={pending}>
           Enregistrer
         </button>
-        {message && <span className="text-xs text-zinc-500">{message}</span>}
+        {message && <span className="text-xs text-ink-3">{message}</span>}
       </div>
     </form>
   );
@@ -209,7 +209,7 @@ export function ContactForm({ companyId }: { companyId: string }) {
         placeholder="Origine de l'adresse (obligatoire) : page contact, rencontre au meetup X, email reçu le…"
       />
       {kind === "personal" && (
-        <p className="text-xs text-amber-700 dark:text-amber-400">
+        <p className="text-xs text-warn">
           Donnée personnelle : une mention d'information sera ajoutée automatiquement au message, et le
           contact peut être supprimé à tout moment.
         </p>
@@ -217,7 +217,7 @@ export function ContactForm({ companyId }: { companyId: string }) {
       <button type="submit" className={buttonClass.secondary} disabled={pending}>
         Ajouter le contact
       </button>
-      {state && !state.ok && <p className="text-xs text-red-700">{state.message}</p>}
+      {state && !state.ok && <p className="text-xs text-bad">{state.message}</p>}
     </form>
   );
 }

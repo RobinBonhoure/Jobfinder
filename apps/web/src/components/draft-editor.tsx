@@ -34,7 +34,7 @@ export function DraftEditor({
 
   return (
     <div className="space-y-2">
-      <p className="text-xs text-zinc-500">
+      <p className="text-xs text-ink-3">
         Destinataire : <span className="font-mono">{to}</span>
       </p>
       <input
@@ -60,7 +60,7 @@ export function DraftEditor({
             Ouvrir dans le client mail
           </a>
         ) : (
-          <span className="text-xs text-zinc-500">Message trop long pour un lien mailto : copie-le.</span>
+          <span className="text-xs text-ink-3">Message trop long pour un lien mailto : copie-le.</span>
         )}
         <CopyButton text={subject} label="Copier l'objet" />
         <CopyButton text={body} label="Copier le message" />
@@ -81,7 +81,7 @@ export function DraftEditor({
             Marquer envoyé
           </button>
         )}
-        {message && <span className="text-xs text-zinc-500">{message}</span>}
+        {message && <span className="text-xs text-ink-3">{message}</span>}
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ import { ActionButton } from "@/components/action-button";
 import { NextActionInput, StatusSelect } from "@/components/application-controls";
 import { CompanyEditor, ContactForm } from "@/components/company-controls";
 import { DraftEditor } from "@/components/draft-editor";
-import { Badge, Banner, Card, ExternalLink, PageHeader } from "@/components/ui";
+import { Badge, Banner, Card, ExternalLink, Page, PageHeader } from "@/components/ui";
 import { fmtDate, fmtDateTime } from "@/lib/format";
 
 export default async function CompanyPage({ params }: PageProps<"/companies/[id]">) {
@@ -26,26 +26,28 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[id]
   const usable = contacts.filter((c) => c.email && !c.optedOutAt);
 
   return (
-    <>
-      <Link href="/companies" className="text-xs text-zinc-500 hover:underline">
-        ← Spontanées
-      </Link>
-      <PageHeader
-        title={company.name}
-        subtitle={
-          <>
-            {company.website ? (
-              <ExternalLink href={company.website}>{company.domain}</ExternalLink>
-            ) : (
-              "site inconnu"
-            )}
-            {company.siren && ` · SIREN ${company.siren}`}
-            {company.nafCode && ` · NAF ${company.nafCode}`}
-            {company.headcountRange && ` · effectif ${company.headcountRange}`}
-            {boards.length > 0 && ` · ${boards.length} board(s) ATS suivi(s)`}
-          </>
-        }
-      />
+    <Page>
+      <div>
+        <Link href="/companies" className="text-xs text-ink-3 hover:text-ink hover:underline">
+          ← Spontanées
+        </Link>
+        <PageHeader
+          title={company.name}
+          subtitle={
+            <>
+              {company.website ? (
+                <ExternalLink href={company.website}>{company.domain}</ExternalLink>
+              ) : (
+                "site inconnu"
+              )}
+              {company.siren && ` · SIREN ${company.siren}`}
+              {company.nafCode && ` · NAF ${company.nafCode}`}
+              {company.headcountRange && ` · effectif ${company.headcountRange}`}
+              {boards.length > 0 && ` · ${boards.length} board(s) ATS suivi(s)`}
+            </>
+          }
+        />
+      </div>
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
         <div className="space-y-4">
           <Card title="Message">
@@ -59,9 +61,9 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[id]
                 sent={current.status !== "to_apply"}
               />
             ) : usable.length === 0 ? (
-              <p className="text-sm text-zinc-500">Ajoute ou découvre un contact pour générer un message.</p>
+              <p className="text-sm text-ink-3">Ajoute ou découvre un contact pour générer un message.</p>
             ) : (
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm text-ink-3">
                 Choisis un contact ci-contre et clique sur « Générer le message ».
               </p>
             )}
@@ -71,13 +73,13 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[id]
             <Card title="Suivi">
               <div className="flex flex-wrap items-center gap-2 text-sm">
                 <StatusSelect applicationId={current.id} status={current.status} />
-                <span className="text-xs text-zinc-500">Relance</span>
+                <span className="text-xs text-ink-3">Relance</span>
                 <NextActionInput applicationId={current.id} value={current.nextActionAt} />
                 {current.appliedAt && (
-                  <span className="text-xs text-zinc-500">envoyé le {fmtDate(current.appliedAt)}</span>
+                  <span className="text-xs text-ink-3">envoyé le {fmtDate(current.appliedAt)}</span>
                 )}
               </div>
-              <ul className="mt-3 space-y-1 text-xs text-zinc-600 dark:text-zinc-400">
+              <ul className="mt-3 space-y-1 text-xs text-ink-2">
                 {events.map((e) => (
                   <li key={e.id}>
                     {fmtDateTime(e.occurredAt)} — {e.type}
@@ -113,23 +115,25 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[id]
             }
           >
             {!company.domain && (
-              <Banner tone="amber">Renseigne le site web pour pouvoir explorer les pages contact.</Banner>
+              <div className="mb-3">
+                <Banner tone="warn">Renseigne le site web pour pouvoir explorer les pages contact.</Banner>
+              </div>
             )}
             <ul className="space-y-2 text-sm">
-              {contacts.length === 0 && <li className="text-zinc-500">Aucun contact.</li>}
+              {contacts.length === 0 && <li className="text-ink-3">Aucun contact.</li>}
               {contacts.map((c) => (
-                <li key={c.id} className="rounded-md border border-zinc-200 p-2 dark:border-zinc-800">
+                <li key={c.id} className="rounded-md border border-line p-2">
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-xs">{c.email}</span>
                     <span className="flex gap-1">
-                      <Badge tone={c.kind === "personal" ? "amber" : "neutral"}>
+                      <Badge tone={c.kind === "personal" ? "warn" : "neutral"}>
                         {c.kind === "personal" ? "nominatif" : "générique"}
                       </Badge>
-                      {c.mxValid === false && <Badge tone="red">MX douteux</Badge>}
-                      {c.optedOutAt && <Badge tone="red">opposition</Badge>}
+                      {c.mxValid === false && <Badge tone="bad">MX douteux</Badge>}
+                      {c.optedOutAt && <Badge tone="bad">opposition</Badge>}
                     </span>
                   </div>
-                  <p className="mt-1 text-xs text-zinc-500">
+                  <p className="mt-1 text-xs text-ink-3">
                     {c.label && `${c.label} · `}source : {c.source} · {fmtDate(c.collectedAt)}
                   </p>
                   <div className="mt-1 flex flex-wrap gap-1">
@@ -168,6 +172,6 @@ export default async function CompanyPage({ params }: PageProps<"/companies/[id]
           </Card>
         </div>
       </div>
-    </>
+    </Page>
   );
 }

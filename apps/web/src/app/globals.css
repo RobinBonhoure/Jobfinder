@@ -1,19 +1,125 @@
 @import "tailwindcss";
 
+/*
+ * Palette sémantique (piste « Net ») : l'UI n'utilise que ces jetons, jamais la palette brute.
+ * Thème : attribut data-theme sur <html> (cookie, voir lib/theme.ts), sinon réglage du système.
+ */
+:root {
+  color-scheme: light;
+  --canvas: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #eef1f5;
+  --line: #dde2ea;
+  --line-strong: #c3cad5;
+  --ink: #141a24;
+  --ink-2: #465163;
+  --ink-3: #626d7e;
+  --accent: #2451c7;
+  --accent-hover: #1c43a8;
+  --accent-ink: #ffffff;
+  --sel: #e8eefc;
+  --good: #137a4a;
+  --good-bg: #e3f4ea;
+  --warn: #9a5500;
+  --warn-bg: #fdf0dc;
+  --bad: #b3261e;
+  --bad-bg: #fbe7e5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --canvas: #0f1217;
+    --surface: #161a21;
+    --surface-2: #1d222b;
+    --line: #2a313c;
+    --line-strong: #3a4350;
+    --ink: #e7ebf1;
+    --ink-2: #b1bac6;
+    --ink-3: #8f99a7;
+    --accent: #86a6ff;
+    --accent-hover: #a3bcff;
+    --accent-ink: #0b1020;
+    --sel: #1c2740;
+    --good: #5cc995;
+    --good-bg: #12291d;
+    --warn: #f0ab52;
+    --warn-bg: #2c1f0c;
+    --bad: #ff8a80;
+    --bad-bg: #331614;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #0f1217;
+  --surface: #161a21;
+  --surface-2: #1d222b;
+  --line: #2a313c;
+  --line-strong: #3a4350;
+  --ink: #e7ebf1;
+  --ink-2: #b1bac6;
+  --ink-3: #8f99a7;
+  --accent: #86a6ff;
+  --accent-hover: #a3bcff;
+  --accent-ink: #0b1020;
+  --sel: #1c2740;
+  --good: #5cc995;
+  --good-bg: #12291d;
+  --warn: #f0ab52;
+  --warn-bg: #2c1f0c;
+  --bad: #ff8a80;
+  --bad-bg: #331614;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-ink: var(--accent-ink);
+  --color-sel: var(--sel);
+  --color-good: var(--good);
+  --color-good-bg: var(--good-bg);
+  --color-warn: var(--warn);
+  --color-warn-bg: var(--warn-bg);
+  --color-bad: var(--bad);
+  --color-bad-bg: var(--bad-bg);
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+/* Échelle relevée pour la lisibilité : rien sous 12 px, texte courant à 15 px. */
 @theme {
-  --font-sans:
-    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.45;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5;
 }
 
 body {
-  @apply bg-zinc-50 text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100;
+  @apply bg-canvas text-sm text-ink antialiased;
 }
 
 kbd {
-  @apply rounded border border-zinc-300 bg-white px-1 font-mono text-[0.7rem] dark:border-zinc-700 dark:bg-zinc-900;
+  @apply rounded border border-current/40 px-1 font-mono text-[0.75rem] leading-none opacity-80;
+}
+
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-accent;
 }
 
 .prose-job {
-  @apply text-sm leading-relaxed whitespace-pre-line text-zinc-700 dark:text-zinc-300;
+  @apply max-w-[68ch] text-[0.97rem] leading-[1.65] whitespace-pre-line text-ink;
+}
+
+/* Titre de section : petites capitales espacées, discrètes. */
+.eyebrow {
+  @apply text-xs font-semibold tracking-wider text-ink-3 uppercase;
 }

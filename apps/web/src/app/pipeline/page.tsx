@@ -4,7 +4,7 @@ import Link from "next/link";
 import { deleteApplicationAction } from "@/actions/applications";
 import { ActionButton } from "@/components/action-button";
 import { ExternalApplicationForm, NextActionInput, StatusSelect } from "@/components/application-controls";
-import { Badge, Card, EmptyState, ExternalLink, PageHeader } from "@/components/ui";
+import { Badge, Card, EmptyState, ExternalLink, Page, PageHeader } from "@/components/ui";
 import { fmtDate, isOverdue } from "@/lib/format";
 
 function Row({ r }: { r: PipelineRow }) {
@@ -15,7 +15,7 @@ function Row({ r }: { r: PipelineRow }) {
       ? `/companies/${r.app.companyId}`
       : null;
   return (
-    <tr className="border-b border-zinc-100 last:border-0 dark:border-zinc-800">
+    <tr className="border-b border-line last:border-0">
       <td className="px-3 py-2 align-top">
         <div className="font-medium">
           {detailHref ? (
@@ -26,20 +26,20 @@ function Row({ r }: { r: PipelineRow }) {
             (r.title ?? "—")
           )}
         </div>
-        <div className="text-xs text-zinc-500">
+        <div className="text-xs text-ink-3">
           {r.company ?? "?"} {r.url && <ExternalLink href={r.url}>↗</ExternalLink>}{" "}
-          {r.app.kind === "spontaneous" && <Badge tone="violet">spontanée</Badge>}
+          {r.app.kind === "spontaneous" && <Badge tone="info">spontanée</Badge>}
         </div>
       </td>
       <td className="px-2 py-2 align-top">
         <StatusSelect applicationId={r.app.id} status={r.app.status} />
       </td>
-      <td className="px-2 py-2 align-top text-xs text-zinc-500">{fmtDate(r.app.appliedAt)}</td>
-      <td className={`px-2 py-2 align-top ${overdue ? "rounded bg-red-50 dark:bg-red-950/40" : ""}`}>
+      <td className="px-2 py-2 align-top text-xs text-ink-3">{fmtDate(r.app.appliedAt)}</td>
+      <td className={`px-2 py-2 align-top ${overdue ? "rounded bg-bad-bg" : ""}`}>
         <NextActionInput applicationId={r.app.id} value={r.app.nextActionAt} />
-        {overdue && <div className="text-xs font-medium text-red-700">relance due</div>}
+        {overdue && <div className="text-xs font-medium text-bad">relance due</div>}
       </td>
-      <td className="max-w-xs px-2 py-2 align-top text-xs text-zinc-600 dark:text-zinc-400">
+      <td className="max-w-xs px-2 py-2 align-top text-xs text-ink-2">
         <p className="line-clamp-3 whitespace-pre-line">{r.app.notes}</p>
       </td>
       <td className="px-2 py-2 text-right align-top">
@@ -64,7 +64,7 @@ export default async function PipelinePage() {
   const due = rows.filter((r) => isOverdue(r.app.nextActionAt) && !CLOSED_STATUSES.has(r.app.status)).length;
 
   return (
-    <>
+    <Page>
       <PageHeader
         title="Candidatures"
         subtitle={`${rows.length} candidature(s) · ${due} relance(s) due(s)`}
@@ -77,17 +77,17 @@ export default async function PipelinePage() {
         {groups.map((g) => (
           <section key={g.status}>
             <h2 className="mb-2 text-sm font-semibold">
-              {applicationStatusLabel[g.status]} <span className="text-zinc-500">({g.rows.length})</span>
+              {applicationStatusLabel[g.status]} <span className="text-ink-3">({g.rows.length})</span>
             </h2>
-            <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+            <div className="overflow-x-auto rounded-lg border border-line bg-surface">
               <table className="w-full text-sm">
-                <thead className="text-left text-xs text-zinc-500">
-                  <tr className="border-b border-zinc-100 dark:border-zinc-800">
-                    <th className="px-3 py-1.5 font-medium">Offre</th>
-                    <th className="px-2 py-1.5 font-medium">Statut</th>
-                    <th className="px-2 py-1.5 font-medium">Postulé</th>
-                    <th className="px-2 py-1.5 font-medium">Relance</th>
-                    <th className="px-2 py-1.5 font-medium">Notes</th>
+                <thead className="bg-surface-2 text-left text-xs text-ink-2">
+                  <tr className="border-b border-line">
+                    <th className="px-3 py-1.5 font-semibold">Offre</th>
+                    <th className="px-2 py-1.5 font-semibold">Statut</th>
+                    <th className="px-2 py-1.5 font-semibold">Postulé</th>
+                    <th className="px-2 py-1.5 font-semibold">Relance</th>
+                    <th className="px-2 py-1.5 font-semibold">Notes</th>
                     <th />
                   </tr>
                 </thead>
@@ -101,6 +101,6 @@ export default async function PipelinePage() {
           </section>
         ))}
       </div>
-    </>
+    </Page>
   );
 }

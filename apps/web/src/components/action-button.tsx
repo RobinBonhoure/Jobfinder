@@ -58,13 +58,7 @@ export function ActionButton<T>({
       >
         {pending ? (pendingLabel ?? "…") : children}
       </button>
-      {message && (
-        <span
-          className={`text-xs ${message.ok ? "text-emerald-700 dark:text-emerald-400" : "text-red-700 dark:text-red-400"}`}
-        >
-          {message.text}
-        </span>
-      )}
+      {message && <span className={`text-xs ${message.ok ? "text-good" : "text-bad"}`}>{message.text}</span>}
     </span>
   );
 }

@@ -26,9 +26,9 @@ export function AddSourceForm() {
           {pending ? "Test en cours…" : "Tester et ajouter"}
         </button>
       </div>
-      {state && !state.ok && <p className="text-sm text-red-700 dark:text-red-400">{state.message}</p>}
+      {state && !state.ok && <p className="text-sm text-bad">{state.message}</p>}
       {state?.ok && (
-        <p className="text-sm text-emerald-700 dark:text-emerald-400">
+        <p className="text-sm text-good">
           {state.data.sourceId} ajoutée : {state.data.fetched} offres, dont {state.data.passed} passent le
           filtre (ex. « {state.data.sampleTitles.join(" », « ")} »).
         </p>

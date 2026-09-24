@@ -33,7 +33,7 @@ export function StatusSelect({ applicationId, status }: { applicationId: string;
           </option>
         ))}
       </select>
-      {error && <span className="text-xs text-red-700">{error}</span>}
+      {error && <span className="text-xs text-bad">{error}</span>}
     </span>
   );
 }
@@ -81,7 +81,7 @@ export function NoteForm({ applicationId }: { applicationId: string }) {
       <button type="submit" className={buttonClass.secondary} disabled={pending || !note.trim()}>
         Ajouter
       </button>
-      {error && <span className="text-xs text-red-700">{error}</span>}
+      {error && <span className="text-xs text-bad">{error}</span>}
     </form>
   );
 }
@@ -106,8 +106,8 @@ export function ExternalApplicationForm() {
       <button type="submit" className={buttonClass.primary} disabled={pending}>
         {pending ? "…" : "Ajouter"}
       </button>
-      {state && !state.ok && <p className="text-xs text-red-700 sm:col-span-5">{state.message}</p>}
-      {state?.ok && <p className="text-xs text-emerald-700 sm:col-span-5">Candidature ajoutée.</p>}
+      {state && !state.ok && <p className="text-xs text-bad sm:col-span-5">{state.message}</p>}
+      {state?.ok && <p className="text-xs text-good sm:col-span-5">Candidature ajoutée.</p>}
     </form>
   );
 }

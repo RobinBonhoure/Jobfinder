@@ -2,7 +2,7 @@ import { listCompanies } from "@jobhunt/core/db";
 import { OUTREACH_STATUSES, type OutreachStatus, outreachStatusLabel } from "@jobhunt/core/domain";
 import Link from "next/link";
 import { AddCompanyForm, CompanySearch } from "@/components/company-controls";
-import { Badge, Card, EmptyState, PageHeader } from "@/components/ui";
+import { Badge, Card, EmptyState, Page, PageHeader } from "@/components/ui";
 import { fmtDate } from "@/lib/format";
 
 export default async function CompaniesPage({ searchParams }: PageProps<"/companies">) {
@@ -14,7 +14,7 @@ export default async function CompaniesPage({ searchParams }: PageProps<"/compan
   const rows = await listCompanies({ outreach: status ?? (all ? undefined : "targets") });
 
   return (
-    <>
+    <Page>
       <PageHeader
         title="Candidatures spontanées"
         subtitle="Entreprises cibles, contacts génériques et brouillons à envoyer depuis ton client mail."
@@ -41,7 +41,7 @@ export default async function CompaniesPage({ searchParams }: PageProps<"/compan
       <div className="grid gap-4 lg:grid-cols-2">
         <Card title="Ajouter une entreprise">
           <AddCompanyForm />
-          <p className="mt-2 text-xs text-zinc-500">
+          <p className="mt-2 text-xs text-ink-3">
             Astuce : depuis la fiche d'une offre, « + Cible de candidature spontanée » ajoute son entreprise.
           </p>
         </Card>
@@ -49,28 +49,28 @@ export default async function CompaniesPage({ searchParams }: PageProps<"/compan
           <CompanySearch />
         </Card>
       </div>
-      <div className="mt-5 overflow-x-auto rounded-lg border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="mt-5 overflow-x-auto rounded-lg border border-line bg-surface">
         {rows.length === 0 ? (
           <EmptyState title="Aucune entreprise dans cette vue." />
         ) : (
           <table className="w-full text-sm">
-            <thead className="text-left text-xs text-zinc-500">
-              <tr className="border-b border-zinc-100 dark:border-zinc-800">
-                <th className="px-3 py-2 font-medium">Entreprise</th>
-                <th className="px-2 py-2 font-medium">Statut</th>
-                <th className="px-2 py-2 font-medium">Contacts</th>
-                <th className="px-2 py-2 font-medium">Offres ouvertes</th>
-                <th className="px-2 py-2 font-medium">Dernier envoi</th>
+            <thead className="bg-surface-2 text-left text-xs text-ink-2">
+              <tr className="border-b border-line">
+                <th className="px-3 py-2 font-semibold">Entreprise</th>
+                <th className="px-2 py-2 font-semibold">Statut</th>
+                <th className="px-2 py-2 font-semibold">Contacts</th>
+                <th className="px-2 py-2 font-semibold">Offres ouvertes</th>
+                <th className="px-2 py-2 font-semibold">Dernier envoi</th>
               </tr>
             </thead>
             <tbody>
               {rows.map(({ company: c, contacts, openJobs, hasBoard, lastSentAt }) => (
-                <tr key={c.id} className="border-b border-zinc-100 last:border-0 dark:border-zinc-800">
+                <tr key={c.id} className="border-b border-line last:border-0">
                   <td className="px-3 py-2">
                     <Link href={`/companies/${c.id}`} className="font-medium hover:underline">
                       {c.name}
                     </Link>
-                    <div className="text-xs text-zinc-500">
+                    <div className="text-xs text-ink-3">
                       {c.domain ?? "site inconnu"} {c.city && `· ${c.city}`}{" "}
                       {hasBoard && <Badge>board ATS</Badge>}
                     </div>
@@ -79,9 +79,9 @@ export default async function CompaniesPage({ searchParams }: PageProps<"/compan
                     <Badge
                       tone={
                         c.outreachStatus === "replied"
-                          ? "green"
+                          ? "good"
                           : c.outreachStatus === "contacted"
-                            ? "blue"
+                            ? "info"
                             : "neutral"
                       }
                     >
@@ -97,6 +97,6 @@ export default async function CompaniesPage({ searchParams }: PageProps<"/compan
           </table>
         )}
       </div>
-    </>
+    </Page>
   );
 }
